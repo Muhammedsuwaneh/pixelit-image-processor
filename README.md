@@ -1,2 +1,3 @@
-# pixelit-opencv-qt-qml-image-editor
+# PixelIt OpenCV Image Editor
+
 Image Editor - OpenCV | Qt/QML | C++ | OpenCV
