@@ -1,0 +1,8 @@
+module PixelItApp
+typeinfo appPixelItApp.qmltypes
+prefer :/qt/qml/PixelItApp/
+Main 254.0 Main.qml
+TitleBar 254.0 TitleBar.qml
+ControlButton 254.0 ControlButton.qml
+depends QtQuick
+

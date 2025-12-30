@@ -1,0 +1,15 @@
+{
+    "formatRevision": 1,
+    "modules": [
+        {
+            "moduleFiles": [
+                {
+                    "entries": [
+                    ],
+                    "filePath": "C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/ControlButton.qml"
+                }
+            ],
+            "moduleId": "PixelItApp(appPixelItApp)"
+        }
+    ]
+}

@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/qt/qml/PixelItApp/">
+    <file alias="Main.qml">C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/Main.qml</file>
+    <file alias="TitleBar.qml">C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/TitleBar.qml</file>
+    <file alias="ControlButton.qml">C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/ControlButton.qml</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qt/qml/PixelItApp">C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/PixelItApp</file>
+
+  </qresource>
+</RCC>

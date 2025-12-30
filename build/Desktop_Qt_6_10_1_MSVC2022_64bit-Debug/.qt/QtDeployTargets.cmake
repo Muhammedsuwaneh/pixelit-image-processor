@@ -1,0 +1,3 @@
+set(__QT_DEPLOY_TARGET_appPixelItApp_FILE C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/appPixelItApp.exe)
+set(__QT_DEPLOY_TARGET_appPixelItApp_TYPE EXECUTABLE)
+set(__QT_DEPLOY_TARGET_appPixelItApp_RUNTIME_DLLS C:/Qt/6.10.1/msvc2022_64/bin/Qt6Quickd.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6OpenGLd.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6Guid.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6QmlMetad.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6QmlModelsd.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6QmlWorkerScriptd.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6Qmld.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6Networkd.dll;C:/Qt/6.10.1/msvc2022_64/bin/Qt6Cored.dll)

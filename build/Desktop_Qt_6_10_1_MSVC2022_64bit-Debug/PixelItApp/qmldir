@@ -1,0 +1,6 @@
+module PixelItApp
+typeinfo appPixelItApp.qmltypes
+prefer :/qt/qml/PixelItApp/
+Main 254.0 Main.qml
+depends QtQuick
+

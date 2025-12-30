@@ -1,0 +1,14 @@
+-rootPath
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor
+-cmake-output
+-output-file
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/.qt/qml_imports/appPixelItApp_build.cmake
+-importPath
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/PixelItApp
+-importPath
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug
+-importPath
+C:/Qt/6.10.1/msvc2022_64/qml
+-qrcFiles
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/.qt/rcc/qmake_PixelItApp.qrc
+C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/.qt/rcc/appPixelItApp_raw_qml_0.qrc

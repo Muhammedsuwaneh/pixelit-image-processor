@@ -1,0 +1,18 @@
+{
+    "classes": [
+        {
+            "className": "WindowController",
+            "lineNumber": 6,
+            "object": true,
+            "qualifiedClassName": "WindowController",
+            "superClasses": [
+                {
+                    "access": "public",
+                    "name": "QObject"
+                }
+            ]
+        }
+    ],
+    "inputFile": "WindowController.h",
+    "outputRevision": 69
+}
