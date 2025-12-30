@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "WindowController.h"
+#include "NavigationController.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,8 +21,10 @@ int main(int argc, char *argv[])
 
     QWindow *window = qobject_cast<QWindow*>(engine.rootObjects().first());
     WindowController controller(window);
+    NavigationController navigationController;
 
     engine.rootContext()->setContextProperty("WindowController", &controller);
+    engine.rootContext()->setContextProperty("NavigationController", &navigationController);
 
     return app.exec();
 }

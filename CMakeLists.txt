@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(OpenCV_DIR "C:/opencv/build/x64/vc16/lib")
 find_package(Qt6 REQUIRED COMPONENTS Quick)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
@@ -27,6 +28,9 @@ qt_add_qml_module(appPixelItApp
     RESOURCES
         assets/logo.png
         assets/logo.ico
+        QML_FILES NavigationButton.qml
+        SOURCES NavigationController.h NavigationController.cpp
+        QML_FILES ImagePropertyNavigation.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -44,6 +48,7 @@ target_link_libraries(appPixelItApp
     PRIVATE Qt6::Quick ${OPEN}
 )
 target_link_libraries(appPixelItApp PRIVATE Qt6::Core ${OpenCV_LIBS})
+target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 
 include(GNUInstallDirs)
 install(TARGETS appPixelItApp
