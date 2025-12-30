@@ -1,1 +1,0 @@
-C:/Users/TTL-DEV2/Documents/dadsadasd/pixelit-opencv-qt-qml-image-editor/PixelItApp/build/Desktop_Qt_6_10_1_MSVC2022_64bit-Debug/appPixelItApp_autogen/include/../EWIEGA46WW/moc_WindowController.cpp.json
