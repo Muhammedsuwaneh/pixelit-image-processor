@@ -23,6 +23,10 @@ qt_add_qml_module(appPixelItApp
         QML_FILES TitleBar.qml
         SOURCES WindowController.h WindowController.cpp
         QML_FILES ControlButton.qml
+
+    RESOURCES
+        assets/logo.png
+        assets/logo.ico
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
