@@ -3,11 +3,11 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
-    width: 200
+    width: 50
     anchors.horizontalCenter: parent.horizontalCenter
 
     ColumnLayout {
-        spacing: 12
+        spacing: 0
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 60
 
@@ -15,9 +15,8 @@ Item {
             model: NavigationController.pages.length
 
             NavigationButton {
-                width: 180
-                content: NavigationController.pages[index]
-                imageSource: "assets/logo.png"
+                width: 50
+                imageSource: "assets/" + NavigationController.pages[index] + ".png"
                 currentButtonIndex: index
 
                 onClicked: NavigationController.currentActivePage = index

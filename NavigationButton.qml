@@ -5,24 +5,22 @@ import QtQuick.Layouts
 Button {
     id: root
 
-    property string content: ""
     property string imageSource: ""
     property int currentButtonIndex: 0
 
     implicitHeight: 40
-    implicitWidth: 230
+    implicitWidth: 100
     hoverEnabled: true
 
     background: Rectangle {
         radius: 8
         opacity: root.hovered ? 0.9 : 1
         color: NavigationController.currentActivePage === root.currentButtonIndex
-               ? "#155DFC"
-               : "#62748E"
+               ? "#0C0A09"
+               : "transparent"
     }
 
     contentItem: RowLayout {
-        spacing: 10
         anchors.fill: parent
 
         Image {
@@ -30,17 +28,7 @@ Button {
             Layout.preferredWidth: 25
             source: root.imageSource
             fillMode: Image.PreserveAspectFit
-            Layout.alignment: Qt.AlignVCenter
-        }
-
-        Text {
-            text: root.content
-            color: "#ffffff"
-            font.pixelSize: 15
-            font.bold: true
-            Layout.alignment: Qt.AlignVCenter
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignLeft
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 

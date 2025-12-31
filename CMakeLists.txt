@@ -28,6 +28,19 @@ qt_add_qml_module(appPixelItApp
     RESOURCES
         assets/logo.png
         assets/logo.ico
+        assets/brightness.png
+        assets/contrast.png
+        assets/crop.png
+        assets/exposure.png
+        assets/grayScale.png
+        assets/invert.png
+        assets/pan.png
+        assets/resize.png
+        assets/rotate.png
+        assets/saturation.png
+        assets/sepia.png
+        assets/sharpen.png
+        assets/zoom.png
         QML_FILES NavigationButton.qml
         SOURCES NavigationController.h NavigationController.cpp
         QML_FILES ImagePropertyNavigation.qml

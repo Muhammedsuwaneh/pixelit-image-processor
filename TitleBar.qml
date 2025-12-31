@@ -12,7 +12,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 12
-        color: "#2b2b2b"
+        color: "#015F78"
         id: titleBar
     }
 
@@ -21,7 +21,7 @@ Item {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         height: 12
-        color: "#2b2b2b"
+        color: "#015F78"
     }
 
     Row
@@ -58,7 +58,7 @@ Item {
 
     Row {
         id: controlButtons
-        spacing: 6
+        spacing: 10
 
         anchors.right: parent.right
         anchors.rightMargin: 8

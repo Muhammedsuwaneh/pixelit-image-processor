@@ -6,7 +6,7 @@ import QtQuick.Layouts
 Window {
     id: root
     width: 1080
-    height: 800
+    height: 700
     visible: true
     flags: Qt.FramelessWindowHint
     color: "transparent"
@@ -39,7 +39,7 @@ Window {
                 id: editorNavigation
                 Layout.row: 1
                 Layout.column: 0
-                Layout.preferredWidth: 250
+                Layout.preferredWidth: 80
                 Layout.fillHeight: true
                 color: "#1d293d"
 

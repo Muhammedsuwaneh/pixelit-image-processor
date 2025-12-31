@@ -3,19 +3,19 @@
 NavigationController::NavigationController(QObject *parent)
     : QObject{parent}
 {
-    this->m_pages << "Zoom in/out"
-                  << "Pan"
-                  << "Rotate"
-                  << "Crop"
-                  << "Resize"
-                  << "Brightness"
-                  << "Contrast"
-                  << "Saturation"
-                  << "Gray Scale"
-                  << "Sepia"
-                  << "Invert"
-                  << "Blue"
-                  << "Sharpen";
+    this->m_pages << "zoom"
+                  << "pan"
+                  << "rotate"
+                  << "crop"
+                  << "resize"
+                  << "brightness"
+                  << "contrast"
+                  << "saturation"
+                  << "exposure"
+                  << "grayScale"
+                  << "sepia"
+                  << "invert"
+                  << "sharpen";
 }
 
 int NavigationController::currentActivePage() const

@@ -1,10 +1,7 @@
 #include "WindowController.h"
 
 WindowController::WindowController(QWindow *window, QObject *parent)
-    : QObject(parent), m_window(window)
-{
-
-}
+    : QObject(parent), m_window(window) {}
 
 void WindowController::minimize() { this->m_window->showMinimized(); }
 
