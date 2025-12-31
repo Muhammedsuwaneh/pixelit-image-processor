@@ -11,6 +11,10 @@ Window {
     flags: Qt.FramelessWindowHint
     color: "transparent"
 
+    property string currentPage:
+        NavigationController.pages[NavigationController.currentActivePage]
+
+
     Rectangle {
         id: appFrame
         anchors.fill: parent
@@ -60,6 +64,59 @@ Window {
                 color: "#F8FAFC"
                 border.color: "#E2E8F0"
                 border.width: 0.5
+
+                ColumnLayout
+                {
+                    id: propertyLayout
+                    spacing: 10
+
+
+                    Item {
+                        Layout.preferredHeight: 20
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                    }
+
+                    // title
+                    RowLayout {
+                           anchors.fill: parent
+                           spacing: 10
+
+                           // pushes content to the left
+                           Item { Layout.preferredWidth: 10 }
+
+                           Image {
+                               Layout.preferredHeight: 17
+                               Layout.preferredWidth: 17
+                               source: "assets/adjust.png"
+                               fillMode: Image.PreserveAspectFit
+                               Layout.alignment: Qt.AlignVCenter
+                           }
+
+                           Text {
+                               text: "Adjust Properties"
+                               color: "#0F172B"
+                               font.pixelSize: 15
+                               font.bold: true
+                               Layout.alignment: Qt.AlignVCenter
+                               elide: Text.ElideRight
+                           }
+
+                           Item { Layout.fillWidth: true }
+                    }
+
+                    // property pages
+                    Loader
+                    {
+                        id: propertyPageLoader
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.leftMargin: 20
+                        Layout.rightMargin: 10
+
+                        source: (root.currentPage === "Gray Scale") ? "GrayScalePage.qml" : root.currentPage + "Page.qml"
+                    }
+                }
             }
 
             // RIGHT SECTION - MAIN

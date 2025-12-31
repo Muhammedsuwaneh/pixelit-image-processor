@@ -11,6 +11,12 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.topMargin: 60
 
+        Item {
+            Layout.preferredHeight: 20
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+        }
+
         Repeater {
             model: NavigationController.pages.length
 

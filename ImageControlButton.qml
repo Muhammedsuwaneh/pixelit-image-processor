@@ -25,7 +25,7 @@ Button {
 
     background: Rectangle {
         radius: 8
-        color: "#0F172B";
+        color: "#45556C";
     }
 
     contentItem: RowLayout {

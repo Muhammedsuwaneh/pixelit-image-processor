@@ -8,6 +8,7 @@ NavigationController::NavigationController(QObject *parent)
                   << "Rotate"
                   << "Crop"
                   << "Resize"
+                  << "Filters"
                   << "Brightness"
                   << "Contrast"
                   << "Saturation"
