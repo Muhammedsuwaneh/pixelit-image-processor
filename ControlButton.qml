@@ -25,7 +25,7 @@ Button {
            hoverEnabled: true
            cursorShape: Qt.PointingHandCursor
 
-           onClicked: {
+        onClicked: {
              root.clicked()
         }
     }

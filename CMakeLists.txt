@@ -32,7 +32,7 @@ qt_add_qml_module(appPixelItApp
         assets/contrast.png
         assets/crop.png
         assets/exposure.png
-        assets/grayScale.png
+        assets/gray.png
         assets/invert.png
         assets/pan.png
         assets/resize.png

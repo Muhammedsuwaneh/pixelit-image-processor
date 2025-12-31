@@ -5,8 +5,8 @@ import QtQuick.Layouts
 
 Window {
     id: root
-    width: 1080
-    height: 700
+    width: 1280
+    height: 880
     visible: true
     flags: Qt.FramelessWindowHint
     color: "transparent"
@@ -39,7 +39,7 @@ Window {
                 id: editorNavigation
                 Layout.row: 1
                 Layout.column: 0
-                Layout.preferredWidth: 80
+                Layout.preferredWidth: 200
                 Layout.fillHeight: true
                 color: "#1d293d"
 
@@ -56,9 +56,7 @@ Window {
 
                 Text {
                     anchors.centerIn: parent
-                    text: NavigationController.pages[
-                        NavigationController.currentActivePage
-                    ]
+                    text: NavigationController.pages[NavigationController.currentActivePage]
                 }
             }
         }
