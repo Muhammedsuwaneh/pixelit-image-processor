@@ -15,7 +15,7 @@ Item {
             model: NavigationController.pages.length
 
             NavigationButton {
-                width: 230
+                width: 150
                 content: NavigationController.pages[index]
                 iconName: NavigationController.pages[index]
                 currentButtonIndex: index

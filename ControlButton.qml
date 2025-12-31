@@ -21,9 +21,9 @@ Button {
 
     MouseArea {
         id: buttonMouseArea
-           anchors.fill: parent
-           hoverEnabled: true
-           cursorShape: Qt.PointingHandCursor
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: Qt.PointingHandCursor
 
         onClicked: {
              root.clicked()

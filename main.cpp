@@ -1,12 +1,13 @@
-#include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include "WindowController.h"
 #include "NavigationController.h"
+#include "ImageController.h"
 
 int main(int argc, char *argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
     QObject::connect(
@@ -22,9 +23,11 @@ int main(int argc, char *argv[])
     QWindow *window = qobject_cast<QWindow*>(engine.rootObjects().first());
     WindowController controller(window);
     NavigationController navigationController;
+    ImageController imageController;
 
     engine.rootContext()->setContextProperty("WindowController", &controller);
     engine.rootContext()->setContextProperty("NavigationController", &navigationController);
+    engine.rootContext()->setContextProperty("imageController", &imageController);
 
     return app.exec();
 }

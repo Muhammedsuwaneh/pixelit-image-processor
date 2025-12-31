@@ -9,8 +9,8 @@ Button {
     property string iconName: ""
     property int currentButtonIndex: 0
 
-    implicitHeight: 50
-    implicitWidth: 250
+    implicitHeight: 40
+    implicitWidth: 150
     hoverEnabled: true
 
     // disabled default button props
@@ -23,7 +23,6 @@ Button {
     palette.shadow: "transparent"
 
     background: Rectangle {
-        radius: 8
         color: NavigationController.currentActivePage === root.currentButtonIndex
                ? "#030712"
                : buttonMouseArea.containsMouse
@@ -35,12 +34,11 @@ Button {
         anchors.fill: parent
         spacing: 10
 
-        // pushes content to the left
-        Item { Layout.preferredWidth: 30 }
+        Item { Layout.preferredWidth: 5 }
 
         Image {
-            Layout.preferredHeight: 25
-            Layout.preferredWidth: 25
+            Layout.preferredHeight: 17
+            Layout.preferredWidth: 17
             source: (root.iconName === "Gray Scale") ? "assets/gray.png" : "assets/" + root.iconName.toLowerCase() + ".png"
             fillMode: Image.PreserveAspectFit
             Layout.alignment: Qt.AlignVCenter
@@ -49,7 +47,7 @@ Button {
         Text {
             text: root.content
             color: "#ffffff"
-            font.pixelSize: 15
+            font.pixelSize: 12
             font.bold: true
             Layout.alignment: Qt.AlignVCenter
             elide: Text.ElideRight
