@@ -59,7 +59,7 @@ Window {
                 id: propertyPage
                 Layout.row: 1
                 Layout.column: 1
-                Layout.preferredWidth: 200
+                Layout.preferredWidth: 250
                 Layout.fillHeight: true
                 color: "#F8FAFC"
                 border.color: "#E2E8F0"
@@ -89,7 +89,7 @@ Window {
                                Layout.preferredHeight: 17
                                Layout.preferredWidth: 17
                                source: "assets/adjust.png"
-                               fillMode: Image.PreserveAspectFit
+                               fillMode: Image.PreserveAspectCrop
                                Layout.alignment: Qt.AlignVCenter
                            }
 
@@ -111,7 +111,7 @@ Window {
                         id: propertyPageLoader
                         Layout.fillWidth: true
                         Layout.fillHeight: true
-                        Layout.leftMargin: 20
+                        Layout.leftMargin: 10
                         Layout.rightMargin: 10
 
                         source: (root.currentPage === "Gray Scale") ? "GrayScalePage.qml" : root.currentPage + "Page.qml"
