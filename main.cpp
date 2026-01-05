@@ -4,6 +4,7 @@
 #include "WindowController.h"
 #include "NavigationController.h"
 #include "ImageController.h"
+#include "ImageProvider.h"
 #include "ImageScaleController.h"
 
 int main(int argc, char *argv[])
@@ -27,9 +28,12 @@ int main(int argc, char *argv[])
     ImageController imageController;
     ImageScaleController imageScaleController;
 
+    engine.addImageProvider("imageController", new ImageProvider());
+    engine.rootContext()->setContextProperty("imageController", &imageController);
+
     engine.rootContext()->setContextProperty("WindowController", &controller);
     engine.rootContext()->setContextProperty("NavigationController", &navigationController);
-    engine.rootContext()->setContextProperty("imageController", &imageController);
+
     engine.rootContext()->setContextProperty("ImageScaleController", &imageScaleController);
 
     return app.exec();

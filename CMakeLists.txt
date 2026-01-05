@@ -10,6 +10,7 @@ find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 find_package(Qt6 REQUIRED COMPONENTS Core)
+find_package(Qt6 REQUIRED COMPONENTS Core)
 find_package(OpenCV REQUIRED)
 
 include_directories(${OpenCV_INCLUDE_DIRS})
@@ -78,6 +79,7 @@ qt_add_qml_module(appPixelItApp
         ImageController.h
         ImageController.cpp
         SOURCES ImageScaleController.h ImageScaleController.cpp
+        SOURCES ImageProvider.h ImageProvider.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -98,6 +100,7 @@ target_link_libraries(appPixelItApp PRIVATE Qt6::Core ${OpenCV_LIBS})
 target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 target_link_libraries(appPixelItApp PRIVATE Qt6::Widgets)
+target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 
 include(GNUInstallDirs)
