@@ -21,7 +21,6 @@ signals:
     void imageSourceChanged();
 
 private:
-
     QUrl m_imageSource;
 };
 

@@ -5,6 +5,10 @@ import QtQuick.Layouts
 Item {
 
     id: root
+    property real minValue: 0
+    property real maxValue: 100
+    property real value: 20
+    property real normalizedValue: (value - minValue) / (maxValue - minValue)
 
     ColumnLayout
     {
@@ -20,25 +24,60 @@ Item {
             Layout.preferredHeight: 30
             Layout.preferredWidth: 230
 
-            Row
+            ColumnLayout
             {
                 anchors.centerIn: parent
 
                 Rectangle
                 {
                     id: outerSlideContainer
-                    color: "#90A1B9"
+                    color: "#CAD5E2"
                     radius: 10
-                    Layout.preferredHeight: 10
-                    Layout.preferredWidth: 220
+                    height: 10
+                    width: 200
 
-                    Rectangle
-                    {
+                    Rectangle {
                         id: innerSlideContainer
-                        color: "red"
+                        color: "#34A6F4"
                         radius: 10
-                        Layout.preferredHeight: 10
-                        Layout.preferredWidth: 100
+                        height: parent.height
+                        width: parent.width * root.normalizedValue
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 2
+                    }
+
+
+                    Rectangle {
+                        id: slider
+                        color: "#34A6F4"
+                        radius: 50
+                        height: 15
+                        width: 15
+                        anchors.verticalCenter: parent.verticalCenter
+                        x: innerSlideContainer.width - width / 2
+                    }
+
+                    MouseArea
+                    {
+                        anchors.fill: parent
+                        hoverEnabled: true
+                        cursorShape: Qt.PointingHandCursor
+
+                        onPressed: updateValue(mouse.x)
+                        onPositionChanged: {
+                            if(pressed)
+                                updateValue(mouse.x)
+                        }
+
+                        function updateValue(mouseX)
+                        {
+                            let clampedX = Math.max(0, Math.min(mouseX, outerSlideContainer.width)) // current slider position
+                            root.value = root.minValue + (clampedX / outerSlideContainer.width) * (root.maxValue - root.minValue) // compute final value
+
+                            //console.log(root.value)
+                            ImageScaleController.slide(root.value)
+                        }
                     }
                 }
             }
