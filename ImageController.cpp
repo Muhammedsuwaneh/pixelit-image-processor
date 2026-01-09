@@ -1,8 +1,6 @@
 #include "ImageController.h"
 #include <QFileDialog>
 
-static const QUrl IMAGE_URL("image://controller/current");
-
 ImageController::ImageController(QObject *parent)
     : QObject{parent}, m_image(QImage())
 {}
@@ -24,34 +22,23 @@ QImage ImageController::matToImage(const cv::Mat &mat)
     return QImage();
 }
 
-QUrl ImageController::imageSource() const
-{
-    return IMAGE_URL;
-}
-
-void ImageController::setProvider(ImageProvider *provider)
-{
-    this->m_provider = provider;
-}
-
 void ImageController::loadImage()
 {
     const QString filePath = QFileDialog::getOpenFileName(nullptr, "Select Image", QString(), "Images (*.png *.jpg *.jpeg *.bmp");
 
     if(!filePath.isEmpty())
     {
-        this->Image = cv::imread(filePath.toStdString());
+        cv::Mat image = cv::imread(filePath.toStdString());
 
-        if(Image.empty()) return;
+        if(image.empty()) return;
 
-        this->m_image = matToImage(this->Image);
-        this->m_provider->setImage(this->m_image);
+        this->m_image = matToImage(image);
 
-        emit imageSourceChanged();
+        emit imageChanged();
     }
 }
 
-void ImageController::saveImage(const QUrl &imageSource)
+QImage ImageController::image() const
 {
-
+    return this->m_image;
 }

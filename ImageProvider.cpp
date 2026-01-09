@@ -1,23 +1,21 @@
 #include "ImageProvider.h"
 
-ImageProvider::ImageProvider() : QQuickImageProvider(QQuickImageProvider::Image) {}
+ImageProvider::ImageProvider(ImageController* imageController)
+    : QQuickImageProvider(QQuickImageProvider::Image), m_ImageController(imageController)  {}
 
 QImage ImageProvider::requestImage(const QString &, QSize *size, const QSize &requestedSize)
 {
-    if(this->m_image.isNull())
+    QImage image = this->m_ImageController->image();
+
+    if(image.isNull())
         return QImage();
 
     if (size)
-        *size = this->m_image.size();
+        *size = image.size();
 
     if (requestedSize.isValid())
-        return this->m_image.scaled(requestedSize, Qt::KeepAspectRatio);
+        return image.scaled(requestedSize, Qt::KeepAspectRatio);
 
-    return this->m_image;
-}
-
-void ImageProvider::setImage(const QImage &img)
-{
-    this->m_image = img;
+    return image;
 }
 

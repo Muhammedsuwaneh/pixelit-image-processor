@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     ImageController imageController;
     ImageScaleController imageScaleController;
 
-    engine.addImageProvider("imageController", new ImageProvider());
+    engine.addImageProvider("controller", new ImageProvider(&imageController));
     engine.rootContext()->setContextProperty("imageController", &imageController);
 
     engine.rootContext()->setContextProperty("WindowController", &controller);

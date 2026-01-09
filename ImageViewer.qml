@@ -15,10 +15,20 @@ Item {
 
         Image
         {
+            id: previewer
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: imageController.imageSource || ""
+            source: "image://controller/current" +  imageController.image
             smooth: true
+
+            Connections {
+                target: imageController
+                function onImageChanged()
+                {
+                    previewer.source = ""
+                    previewer.source = "image://controller/current"
+                }
+            }
         }
     }
 }
