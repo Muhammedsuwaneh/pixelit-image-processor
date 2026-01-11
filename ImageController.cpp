@@ -1,9 +1,7 @@
 #include "ImageController.h"
 #include <QFileDialog>
 
-ImageController::ImageController(QObject *parent)
-    : QObject{parent}, m_image(QImage())
-{}
+ImageController::ImageController(QObject *parent) : QObject{parent}, m_image(QImage()) {}
 
 QImage ImageController::matToImage(const cv::Mat &mat)
 {
@@ -28,11 +26,11 @@ void ImageController::loadImage()
 
     if(!filePath.isEmpty())
     {
-        cv::Mat image = cv::imread(filePath.toStdString());
+        cv::Mat tempImage = cv::imread(filePath.toStdString());
 
-        if(image.empty()) return;
+        if(tempImage.empty()) return;
 
-        this->m_image = matToImage(image);
+        this->m_image = matToImage(tempImage);
 
         emit imageChanged();
     }

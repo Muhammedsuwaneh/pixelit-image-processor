@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
     WindowController controller(window);
     NavigationController navigationController;
     ImageController imageController;
-    ImageScaleController imageScaleController;
 
     engine.addImageProvider("controller", new ImageProvider(&imageController));
     engine.rootContext()->setContextProperty("imageController", &imageController);
@@ -34,7 +33,9 @@ int main(int argc, char *argv[])
     engine.rootContext()->setContextProperty("WindowController", &controller);
     engine.rootContext()->setContextProperty("NavigationController", &navigationController);
 
-    engine.rootContext()->setContextProperty("ImageScaleController", &imageScaleController);
+    auto imageScaleController = new ImageScaleController(&imageController, &engine);
+
+    engine.rootContext()->setContextProperty("ImageScaleController", imageScaleController);
 
     return app.exec();
 }

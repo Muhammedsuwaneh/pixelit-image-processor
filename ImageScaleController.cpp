@@ -1,9 +1,11 @@
 #include "ImageScaleController.h"
 #include <QDebug>
 
-ImageScaleController::ImageScaleController(QObject *parent)
-    : QObject{parent}
-{}
+ImageScaleController::ImageScaleController(ImageController* imageController, QObject *parent) : QObject{parent}, m_ImageController(imageController)
+{
+    Q_ASSERT(m_ImageController);
+    // get image
+}
 
 void ImageScaleController::slide(double value)
 {
@@ -11,6 +13,8 @@ void ImageScaleController::slide(double value)
     qDebug() << value;
 
     // apply image resizing
+
+    // set image
 }
 
 double ImageScaleController::zoomFactor() const

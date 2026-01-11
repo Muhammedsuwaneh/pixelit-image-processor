@@ -10,58 +10,38 @@ Button {
 
     implicitHeight: 35
     implicitWidth: 100
-    hoverEnabled: true
 
-    signal clicked()
-
-    // disabled default button props
     focusPolicy: Qt.NoFocus
-    palette.button: "transparent"
-    palette.highlight: "transparent"
-    palette.light: "transparent"
-    palette.midlight: "transparent"
-    palette.dark: "transparent"
-    palette.shadow: "transparent"
+    hoverEnabled: true
 
     background: Rectangle {
         radius: 8
-        color: "#45556C";
+        color: "#45556C"
     }
 
-    contentItem: RowLayout {
+    contentItem: Item {
         anchors.fill: parent
-        spacing: 10
 
-        // pushes content to the left
-        Item { Layout.preferredWidth: 10 }
+        Row {
+            spacing: 10
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.left: parent.left
+            anchors.leftMargin: 12
 
-        Image {
-            Layout.preferredHeight: 17
-            Layout.preferredWidth: 17
-            source: "assets/" + root.iconName + ".png"
-            fillMode: Image.PreserveAspectFit
-            Layout.alignment: Qt.AlignVCenter
+            Image {
+                width: 17
+                height: 17
+                source: "assets/" + root.iconName + ".png"
+                fillMode: Image.PreserveAspectFit
+            }
+
+            Text {
+                text: root.content
+                color: "#ffffff"
+                font.pixelSize: 12
+                font.bold: true
+                verticalAlignment: Text.AlignVCenter
+            }
         }
-
-        Text {
-            text: root.content
-            color: "#ffffff"
-            font.pixelSize: 12
-            font.bold: true
-            Layout.alignment: Qt.AlignVCenter
-            elide: Text.ElideRight
-        }
-
-        Item { Layout.fillWidth: true }
-    }
-
-    MouseArea
-    {
-        id: buttonMouseArea
-        hoverEnabled: true
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-
-        onClicked: root.clicked()
     }
 }

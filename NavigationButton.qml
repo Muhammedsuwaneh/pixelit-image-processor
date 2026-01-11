@@ -13,7 +13,6 @@ Button {
     implicitWidth: 150
     hoverEnabled: true
 
-    // disabled default button props
     focusPolicy: Qt.NoFocus
     palette.button: "transparent"
     palette.highlight: "transparent"
@@ -34,7 +33,9 @@ Button {
         anchors.fill: parent
         spacing: 10
 
-        Item { Layout.preferredWidth: 5 }
+        Item {
+            Layout.preferredWidth: 5
+        }
 
         Image {
             Layout.preferredHeight: 17
@@ -53,7 +54,10 @@ Button {
             elide: Text.ElideRight
         }
 
-        Item { Layout.fillWidth: true }
+        Item
+        {
+            Layout.fillWidth: true
+        }
     }
 
     MouseArea

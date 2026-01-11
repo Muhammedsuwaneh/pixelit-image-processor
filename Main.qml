@@ -78,9 +78,11 @@ Window {
                     }
 
                     // title
-                    RowLayout {
-                           anchors.fill: parent
-                           spacing: 10
+                    Row {
+                            anchors.verticalCenter: parent.verticalCenter
+                            anchors.left: parent.left
+                            spacing: 10
+                            leftPadding: 10
 
                            // pushes content to the left
                            Item { Layout.preferredWidth: 10 }
@@ -98,6 +100,7 @@ Window {
                                color: "#0F172B"
                                font.pixelSize: 15
                                font.bold: true
+                               topPadding: 5
                                Layout.alignment: Qt.AlignVCenter
                                elide: Text.ElideRight
                            }
