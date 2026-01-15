@@ -53,7 +53,7 @@ Item {
             case "Pad":
                 return Image.Pad;
             default:
-                return Image.PreserveAspectCrop;
+                return Image.PreserveAspectFit;
         }
     }
 }
