@@ -8,43 +8,34 @@ ImageScaleController::ImageScaleController(ImageController* imageController, QOb
 
 void ImageScaleController::slide(double value)
 {
-    cv::Mat src = m_ImageController->imageToControl();
+    cv::Mat src = this->m_ImageController->imageToControl();
     if (src.empty())
         return;
 
-    // Clamp zoom safely
     double factor = value / 100.0;
-    if (factor < 0.05)
-        factor = 0.05;
-    if (factor > 10.0)
-        factor = 10.0;
+    if (factor < 0.01)
+        factor = 0.01;
+
+    qDebug() << factor;
 
     setZoomFactor(factor);
 
     int newWidth  = static_cast<int>(src.cols * factor);
     int newHeight = static_cast<int>(src.rows * factor);
 
-    // Absolute safety check
     if (newWidth <= 0 || newHeight <= 0)
         return;
 
     cv::Mat zoomed;
-    cv::resize(
-        src,
-        zoomed,
-        cv::Size(newWidth, newHeight),
-        0, 0,
-        cv::INTER_LINEAR
-        );
+    cv::resize(src, zoomed, cv::Size(newWidth, newHeight));
 
-    m_ImageController->setImage(zoomed);
+    this->m_ImageController->setImage(zoomed);
 }
 
-/*void ImageScaleController::imageFit(QString fitType)
+void ImageScaleController::imageFit(const QString &fitType)
 {
-    qDebug() << fitType;
-}*/
-
+    this->setImageFitType(fitType);
+}
 
 double ImageScaleController::zoomFactor() const
 {
@@ -57,4 +48,17 @@ void ImageScaleController::setZoomFactor(double newZoomFactor)
         return;
     this->m_zoomFactor = newZoomFactor;
     emit zoomFactorChanged();
+}
+
+QString ImageScaleController::imageFitType() const
+{
+    return m_imageFitType;
+}
+
+void ImageScaleController::setImageFitType(const QString &newImageFitType)
+{
+    if (m_imageFitType == newImageFitType)
+        return;
+    m_imageFitType = newImageFitType;
+    emit imageFitTypeChanged();
 }

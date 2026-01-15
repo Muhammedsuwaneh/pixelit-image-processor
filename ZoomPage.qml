@@ -91,7 +91,7 @@ Item {
 
             Repeater
             {
-                model: ["Stretch", "Aspect Fit", "Aspect Crop", "Tile", "Vertical Tile", "Horizontal Tile", "Pad" ]
+                model: ["Stretch", "Aspect Fit", "Aspect Crop", "Tile", "Vertical Tile", "Horizontal Tile", "Pad"]
 
                 Rectangle
                 {
@@ -99,6 +99,7 @@ Item {
                     color: "#e5e7eb"
                     border.color: "#cad5e2"
                     border.width: 1
+                    opacity:  buttonMouseArea.containsMouse ? .8 : 1
 
                     Layout.preferredHeight: 32
                     Layout.preferredWidth: 110
@@ -112,10 +113,12 @@ Item {
 
                     MouseArea
                     {
+                        id: buttonMouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            //ImageScaleController.imageFit(modelData)
+                            ImageScaleController.imageFit(modelData)
                         }
                     }
                 }

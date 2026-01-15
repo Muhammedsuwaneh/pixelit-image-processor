@@ -4,6 +4,8 @@ import QtQuick.Layouts
 
 Item {
 
+    id: root
+
     Rectangle {
         width: 850
         height: 750
@@ -17,7 +19,7 @@ Item {
         {
             id: previewer
             anchors.fill: parent
-            fillMode: Image.PreserveAspectCrop
+            fillMode: root.getFillMode()
             source: "image://controller/current"
             smooth: true
 
@@ -29,6 +31,29 @@ Item {
                     previewer.source = "image://controller/current"
                 }
             }
+        }
+    }
+
+    function getFillMode()
+    {
+        switch(ImageScaleController.imageFitType)
+        {
+            case "Stretch":
+                return Image.Stretch;
+            case "Aspect Fit":
+                return Image.PreserveAspectFit;
+            case "Aspect Crop":
+                return Image.PreserveAspectCrop;
+            case "Tile":
+                return Image.Tile;
+            case "Vertical Tile":
+                return Image.TileVertically;
+            case "Horizontal Tile":
+                return Image.TileHorizontally;
+            case "Pad":
+                return Image.Pad;
+            default:
+                return Image.PreserveAspectCrop;
         }
     }
 }
