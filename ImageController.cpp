@@ -26,17 +26,33 @@ void ImageController::loadImage()
 
     if(!filePath.isEmpty())
     {
-        cv::Mat tempImage = cv::imread(filePath.toStdString());
+        this->m_imageToControl = cv::imread(filePath.toStdString());
 
-        if(tempImage.empty()) return;
+        if(this->m_imageToControl.empty()) return;
 
-        this->m_image = matToImage(tempImage);
+        this->m_image = matToImage(this->m_imageToControl);
 
         emit imageChanged();
+        emit imageToControlChanged();
     }
 }
 
 QImage ImageController::image() const
 {
     return this->m_image;
+}
+
+cv::Mat ImageController::imageToControl() const
+{
+    return this->m_imageToControl;
+}
+
+void ImageController::setImage(cv::Mat image)
+{
+    this->m_imageToControl = image;
+
+    this->m_image = matToImage(this->m_imageToControl);
+
+    emit imageToControlChanged();
+    emit imageChanged();
 }

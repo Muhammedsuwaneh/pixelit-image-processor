@@ -10,11 +10,19 @@ ImageScaleController::ImageScaleController(ImageController* imageController, QOb
 void ImageScaleController::slide(double value)
 {
     this->setZoomFactor(value);
-    qDebug() << value;
 
-    // apply image resizing
+    // get current image if available
+    this->m_image = this->m_ImageController->imageToControl();
 
-    // set image
+    if(!this->m_image.empty())
+    {
+        qDebug() << "Image Width: " << this->m_image.cols;
+        qDebug() << "Image Height: " << this->m_image.rows;
+
+        // apply image resizing
+
+        // set image
+    }
 }
 
 double ImageScaleController::zoomFactor() const
