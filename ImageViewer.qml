@@ -18,7 +18,7 @@ Item {
             id: previewer
             anchors.fill: parent
             fillMode: Image.PreserveAspectCrop
-            source: "image://controller/current" +  imageController.image
+            source: "image://controller/current"
             smooth: true
 
             Connections {

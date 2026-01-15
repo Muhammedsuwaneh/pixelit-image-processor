@@ -8,6 +8,8 @@ Button {
     property string content: ""
     property string iconName: ""
 
+    signal clicked()
+
     implicitHeight: 35
     implicitWidth: 100
 
@@ -16,7 +18,7 @@ Button {
 
     background: Rectangle {
         radius: 8
-        color: "#45556C"
+        color: buttonMouseArea.hoverEnabled ? "#45556C" : "#0F172B"
     }
 
     contentItem: Item {
@@ -43,5 +45,14 @@ Button {
                 verticalAlignment: Text.AlignVCenter
             }
         }
+    }
+
+    MouseArea
+    {
+        id: buttonMouseArea
+        hoverEnabled: true
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+        onClicked: root.clicked()
     }
 }

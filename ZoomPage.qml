@@ -91,7 +91,7 @@ Item {
 
             Repeater
             {
-                model: ["Fit Screen", "Actual Size", "Fill Screen", "Fill Width", "Fill Height" ]
+                model: ["Stretch", "Aspect Fit", "Aspect Crop", "Tile", "Vertical Tile", "Horizontal Tile", "Pad" ]
 
                 Rectangle
                 {
@@ -115,28 +115,11 @@ Item {
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            root.getUserClicks(modelData)
+                            //ImageScaleController.imageFit(modelData)
                         }
                     }
                 }
             }
-        }
-    }
-
-    function getUserClicks(clickedProperty)
-    {
-        switch(clickedProperty)
-        {
-            case "Fit Screen":
-                break;
-            case "Actual Size":
-                break;
-            case "Fill Screen":
-                break;
-            case "Fill Width":
-                break;
-            case "Fill Height":
-                break;
         }
     }
 }

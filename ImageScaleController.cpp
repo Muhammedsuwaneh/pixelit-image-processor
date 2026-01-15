@@ -4,26 +4,47 @@
 ImageScaleController::ImageScaleController(ImageController* imageController, QObject *parent) : QObject{parent}, m_ImageController(imageController)
 {
     Q_ASSERT(m_ImageController);
-    // get image
 }
 
 void ImageScaleController::slide(double value)
 {
-    this->setZoomFactor(value);
+    cv::Mat src = m_ImageController->imageToControl();
+    if (src.empty())
+        return;
 
-    // get current image if available
-    this->m_image = this->m_ImageController->imageToControl();
+    // Clamp zoom safely
+    double factor = value / 100.0;
+    if (factor < 0.05)
+        factor = 0.05;
+    if (factor > 10.0)
+        factor = 10.0;
 
-    if(!this->m_image.empty())
-    {
-        qDebug() << "Image Width: " << this->m_image.cols;
-        qDebug() << "Image Height: " << this->m_image.rows;
+    setZoomFactor(factor);
 
-        // apply image resizing
+    int newWidth  = static_cast<int>(src.cols * factor);
+    int newHeight = static_cast<int>(src.rows * factor);
 
-        // set image
-    }
+    // Absolute safety check
+    if (newWidth <= 0 || newHeight <= 0)
+        return;
+
+    cv::Mat zoomed;
+    cv::resize(
+        src,
+        zoomed,
+        cv::Size(newWidth, newHeight),
+        0, 0,
+        cv::INTER_LINEAR
+        );
+
+    m_ImageController->setImage(zoomed);
 }
+
+/*void ImageScaleController::imageFit(QString fitType)
+{
+    qDebug() << fitType;
+}*/
+
 
 double ImageScaleController::zoomFactor() const
 {

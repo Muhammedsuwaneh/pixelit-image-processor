@@ -15,6 +15,7 @@ class ImageScaleController : public QObject
 public:
     explicit ImageScaleController(ImageController* imageController, QObject *parent = nullptr);
     Q_INVOKABLE void slide(double value);
+    //Q_INVOKABLE void imageFit(QString fitType);
 
     double zoomFactor() const;
     void setZoomFactor(double newZoomFactor);
