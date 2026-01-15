@@ -7,6 +7,7 @@
 #include "ImageProvider.h"
 #include "ImageScaleController.h"
 #include "ImageRotationController.h"
+#include "ImageTextureController.h"
 
 int main(int argc, char *argv[])
 {

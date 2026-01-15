@@ -12,12 +12,12 @@ class ImageTextureController : public QObject
 public:
     explicit ImageTextureController(ImageController* imageController, QObject *parent = nullptr);
 
-    // brightness
-    // contrast
-    // saturation
-    // exposure
-    // grayscale
-    // sepia
+    Q_INVOKABLE void adjustBrightness(int brightness);
+    Q_INVOKABLE void adjustContrast(int contrast);
+    Q_INVOKABLE void adjustSaturation(int saturation);
+    Q_INVOKABLE void adjustExposure(int exposure);
+    Q_INVOKABLE void adjustGrayScale(int grayScale);
+    Q_INVOKABLE void adjustSepia(int sepia);
 
 signals:
 private:
