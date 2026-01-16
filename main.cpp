@@ -8,6 +8,7 @@
 #include "ImageScaleController.h"
 #include "ImageRotationController.h"
 #include "ImageTextureController.h"
+#include "FiltersController.h"
 
 int main(int argc, char *argv[])
 {
@@ -38,10 +39,12 @@ int main(int argc, char *argv[])
     auto imageScaleController = new ImageScaleController(&imageController, &engine);
     auto imageRotationController = new ImageRotationController(&imageController, &engine);
     auto imageTextureController = new ImageTextureController(&imageController, &engine);
+    auto filtersController = new FiltersController(&imageController, &engine);
 
     engine.rootContext()->setContextProperty("ImageScaleController", imageScaleController);
     engine.rootContext()->setContextProperty("ImageRotationController", imageRotationController);
     engine.rootContext()->setContextProperty("ImageTextureController", imageTextureController);
+    engine.rootContext()->setContextProperty("FiltersController", filtersController);
 
     return app.exec();
 }
