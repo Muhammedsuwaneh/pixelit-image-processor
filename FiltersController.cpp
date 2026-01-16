@@ -8,6 +8,8 @@ FiltersController::FiltersController(ImageController* imageController, QObject *
 
 void FiltersController::applyFilter(QString filter)
 {
+    this->m_ImageController->restoreToDefault();
+
     if(filter == "Gray Scale") ApplyGrayFilter();
     else if("Sepia") ApplySepia();
     else if("Gaussian Blur Filter") ApplyGaussianBlur();

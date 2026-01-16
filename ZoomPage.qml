@@ -7,7 +7,7 @@ Item {
     id: root
     property real minValue: 0
     property real maxValue: 100
-    property real value: 20
+    property real value: 0
     property real normalizedValue: (value - minValue) / (maxValue - minValue)
 
     ColumnLayout

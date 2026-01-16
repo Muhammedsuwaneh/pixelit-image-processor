@@ -32,9 +32,17 @@ void ImageController::loadImage()
 
         this->m_image = matToImage(this->m_imageToControl);
 
+        this->m_defaultImageToControl = this->m_imageToControl;
+
         emit imageChanged();
         emit imageToControlChanged();
+        emit defaultImageToControlChanged();
     }
+}
+
+void ImageController::restoreToDefault()
+{
+    this->setImage(this->m_defaultImageToControl);
 }
 
 QImage ImageController::image() const
@@ -55,4 +63,9 @@ void ImageController::setImage(cv::Mat image)
 
     emit imageToControlChanged();
     emit imageChanged();
+}
+
+cv::Mat ImageController::defaultImageToControl() const
+{
+    return m_defaultImageToControl;
 }
