@@ -117,7 +117,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageScaleController.adjustSepia(modelData)
+                            root.value = parseInt(modelData)
+                            ImageScaleController.adjustSepia(root.value)
                         }
                     }
                 }

@@ -118,7 +118,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageScaleController.adjustGrayScale(modelData)
+                            root.value = parseInt(modelData)
+                            ImageScaleController.adjustGrayScale(root.value)
                         }
                     }
                 }

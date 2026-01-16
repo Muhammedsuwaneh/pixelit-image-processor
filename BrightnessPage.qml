@@ -117,7 +117,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageScaleController.adjustBrightness(modelData)
+                            root.value = parseInt(modelData)
+                            ImageScaleController.adjustBrightness(root.value)
                         }
                     }
                 }

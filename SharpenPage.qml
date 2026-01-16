@@ -118,7 +118,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageScaleController.adjustSharpening(modelData)
+                            root.value = parseInt(modelData)
+                            ImageScaleController.adjustSharpening(root.value)
                         }
                     }
                 }

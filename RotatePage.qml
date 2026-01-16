@@ -148,7 +148,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageRotationController.rotateImage(modelData)
+                            root.angle = parseInt(modelData)
+                            ImageRotationController.rotateImage(root.angle)
                         }
                     }
                 }

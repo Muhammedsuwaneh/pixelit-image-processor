@@ -117,7 +117,8 @@ Item {
                         hoverEnabled: true
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
-                            ImageScaleController.adjustContrast(modelData)
+                            root.value = parseInt(modelData)
+                            ImageScaleController.adjustContrast(value)
                         }
                     }
                 }
