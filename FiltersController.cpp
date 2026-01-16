@@ -1,38 +1,48 @@
 #include "FiltersController.h"
+#include <opencv2/opencv.hpp>
 
 FiltersController::FiltersController(ImageController* imageController, QObject *parent)
-    : QObject{parent}, m_ImageController(imageController)
+    : QObject{parent},
+    m_ImageController(imageController)
 {
     Q_ASSERT(imageController);
 }
 
-void FiltersController::applyFilter(QString filter)
+void FiltersController::applyFilter(const QString& filter)
 {
-    this->m_ImageController->restoreToDefault();
+    if (!m_ImageController)
+        return;
 
-    if(filter == "Gray Scale") ApplyGrayFilter();
-    else if("Sepia") ApplySepia();
-    else if("Gaussian Blur Filter") ApplyGaussianBlur();
-    else if("Sharpen") ApplySharpen();
-    else if("Edge Detection Filter") ApplyEdgeDetection();
+    if (filter == "Gray Scale")
+        applyGrayFilter();
+    else if (filter == "Sepia")
+        applySepia();
+    else if (filter == "Gaussian Blur Filter")
+        applyGaussianBlur();
+    else if (filter == "Sharpen")
+        applySharpen();
+    else if (filter == "Edge Detection Filter")
+        applyEdgeDetection();
 }
 
-void FiltersController::ApplyGrayFilter()
+void FiltersController::applyGrayFilter()
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty())
+        return;
 
-    cv::Mat dst;
-    cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
-    cv::cvtColor(dst, dst, cv::COLOR_GRAY2BGR); // keep 3 channels
+    cv::Mat gray, dst;
+    cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(gray, dst, cv::COLOR_GRAY2BGR); // keep 3 channels
 
-    this->m_ImageController->setImage(dst);
+    m_ImageController->setCurrentImage(dst);
 }
 
-void FiltersController::ApplySepia()
+void FiltersController::applySepia()
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty())
+        return;
 
     cv::Mat sepia;
     cv::Mat kernel = (cv::Mat_<float>(3,3) <<
@@ -44,24 +54,26 @@ void FiltersController::ApplySepia()
     cv::transform(src, sepia, kernel);
     sepia.convertTo(sepia, CV_8UC3); // clamp values
 
-    this->m_ImageController->setImage(sepia);
+    m_ImageController->setCurrentImage(sepia);
 }
 
-void FiltersController::ApplyGaussianBlur()
+void FiltersController::applyGaussianBlur()
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty())
+        return;
 
     cv::Mat blurred;
     cv::GaussianBlur(src, blurred, cv::Size(9, 9), 0);
 
-    this->m_ImageController->setImage(blurred);
+    m_ImageController->setCurrentImage(blurred);
 }
 
-void FiltersController::ApplySharpen()
+void FiltersController::applySharpen()
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty())
+        return;
 
     cv::Mat sharpened;
     cv::Mat kernel = (cv::Mat_<float>(3,3) <<
@@ -72,18 +84,20 @@ void FiltersController::ApplySharpen()
 
     cv::filter2D(src, sharpened, -1, kernel);
 
-    this->m_ImageController->setImage(sharpened);
+    m_ImageController->setCurrentImage(sharpened);
 }
 
-void FiltersController::ApplyEdgeDetection()
-{
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
 
-    cv::Mat gray, edges, result;
+void FiltersController::applyEdgeDetection()
+{
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty())
+        return;
+
+    cv::Mat gray, edges, dst;
     cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
     cv::Canny(gray, edges, 100, 200);
-    cv::cvtColor(edges, result, cv::COLOR_GRAY2BGR);
+    cv::cvtColor(edges, dst, cv::COLOR_GRAY2BGR);
 
-    this->m_ImageController->setImage(result);
+    m_ImageController->setCurrentImage(dst);
 }

@@ -1,36 +1,45 @@
 #include "ImageTextureController.h"
+#include <algorithm>
 
-ImageTextureController::ImageTextureController(ImageController* imageController, QObject *parent): QObject{parent}, m_ImageController(imageController)
+ImageTextureController::ImageTextureController(
+    ImageController* imageController,
+    QObject *parent)
+    : QObject{parent},
+    m_ImageController(imageController)
 {
     Q_ASSERT(imageController);
 }
 
 void ImageTextureController::adjustBrightness(int brightness)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    double val = brightness / 100.0;
+    double beta = brightness; // range: [-100, 100]
 
     cv::Mat dst;
-    src.convertTo(dst, -1, 1, val);
-    this->m_ImageController->setImage(dst);
+    src.convertTo(dst, -1, 1.0, beta);
+
+    m_ImageController->setCurrentImage(dst);
 }
 
 void ImageTextureController::adjustContrast(int contrast)
 {
-    double val = contrast / 100.0;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    cv::Mat src = this->m_ImageController->imageToControl();
+    double alpha = std::clamp(contrast / 100.0, 0.0, 3.0);
+
     cv::Mat dst;
-    src.convertTo(dst, -1, val, 0);
-    this->m_ImageController->setImage(dst);
+    src.convertTo(dst, -1, alpha, 0);
+
+    m_ImageController->setCurrentImage(dst);
 }
 
 void ImageTextureController::adjustSaturation(int saturation)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty() || src.channels() < 3) return;
 
     cv::Mat hsv;
     cv::cvtColor(src, hsv, cv::COLOR_BGR2HSV);
@@ -38,67 +47,77 @@ void ImageTextureController::adjustSaturation(int saturation)
     std::vector<cv::Mat> channels;
     cv::split(hsv, channels);
 
-    double val = saturation / 100.0;
-    channels[1].convertTo(channels[1], -1, val, 0);
+    double scale = std::clamp(saturation / 100.0, 0.0, 3.0);
+    channels[1].convertTo(channels[1], -1, scale, 0);
+
     cv::merge(channels, hsv);
 
     cv::Mat dst;
     cv::cvtColor(hsv, dst, cv::COLOR_HSV2BGR);
 
-    this->m_ImageController->setImage(dst);
+    m_ImageController->setCurrentImage(dst);
 }
 
 void ImageTextureController::adjustExposure(int exposure)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    double val = exposure / 100.0;
+    double gamma = std::clamp(exposure / 100.0, 0.1, 3.0);
+
     cv::Mat dst;
-    src.convertTo(dst, -1, val, 0);
-    this->m_ImageController->setImage(dst);
+    cv::pow(src / 255.0, 1.0 / gamma, dst);
+    dst *= 255.0;
+
+    dst.convertTo(dst, CV_8U);
+
+    m_ImageController->setCurrentImage(dst);
 }
 
-void ImageTextureController::adjustGrayScale(int grayScale)
+void ImageTextureController::adjustGrayScale(int)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    double val = grayScale / 100.0;
-    cv::Mat dst;
-    cv::cvtColor(src, dst, cv::COLOR_BGR2GRAY);
-    this->m_ImageController->setImage(dst);
+    cv::Mat gray, dst;
+    cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
+    cv::cvtColor(gray, dst, cv::COLOR_GRAY2BGR);
+
+    m_ImageController->setCurrentImage(dst);
 }
 
 void ImageTextureController::adjustSepia(int sepia)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    double val = sepia / 100.0;
-    cv::Mat dst;
+    double strength = std::clamp(sepia / 100.0, 0.0, 1.0);
 
     cv::Mat kernel = (cv::Mat_<float>(3,3) <<
                           0.272, 0.534, 0.131,
                       0.349, 0.686, 0.168,
                       0.393, 0.769, 0.189);
 
-    cv::transform(src, dst, kernel);
-    this->m_ImageController->setImage(dst);
+    cv::Mat sepiaImg;
+    cv::transform(src, sepiaImg, kernel);
+
+    cv::Mat dst;
+    cv::addWeighted(src, 1.0 - strength, sepiaImg, strength, 0, dst);
+
+    m_ImageController->setCurrentImage(dst);
 }
 
-void ImageTextureController::adjustSharpening(int val)
+void ImageTextureController::adjustSharpening(int value)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
-    if(src.empty()) return;
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
 
-    auto amount = val / 100.0 * 1.5;
-
-    amount = std::clamp(amount, 0.0, 1.5);
+    double amount = std::clamp(value / 100.0, 0.0, 2.0);
 
     cv::Mat blurred, dst;
     cv::GaussianBlur(src, blurred, cv::Size(0, 0), 5);
 
     cv::addWeighted(src, 1 + amount, blurred, -amount, 0, dst);
-    this->m_ImageController->setImage(dst);
+
+    m_ImageController->setCurrentImage(dst);
 }

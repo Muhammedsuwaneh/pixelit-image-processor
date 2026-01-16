@@ -9,13 +9,13 @@ class ImageController;
 class ImageRotationController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(signed int rotationAngle READ rotationAngle WRITE setRotationAngle NOTIFY rotationAngleChanged)
+    Q_PROPERTY(double rotationAngle READ rotationAngle WRITE setRotationAngle NOTIFY rotationAngleChanged)
 public:
     explicit ImageRotationController(ImageController* imageController, QObject *parent = nullptr);
-    Q_INVOKABLE void rotateImage(signed int angle);
+    Q_INVOKABLE void rotateImage(double angle);
 
-    signed int rotationAngle() const;
-    void setRotationAngle(signed int newRotationAngle);
+    double rotationAngle() const;
+    void setRotationAngle(double newRotationAngle);
 
 signals:
 
@@ -23,7 +23,7 @@ signals:
 
 private:
     ImageController* m_ImageController;
-    signed int m_rotationAngle;
+    double m_rotationAngle;
 };
 
 #endif // IMAGEROTATIONCONTROLLER_H

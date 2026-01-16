@@ -2,39 +2,40 @@
 #define IMAGECONTROLLER_H
 
 #include <QObject>
-#include <QUrl>
-#include <opencv2/opencv.hpp>
-#include <opencv2/core.hpp>
 #include <QImage>
+#include <opencv2/opencv.hpp>
 
 class ImageController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QImage image READ image NOTIFY imageChanged)
-    Q_PROPERTY(cv::Mat imageToControl READ imageToControl NOTIFY imageToControlChanged)
-    Q_PROPERTY(cv::Mat defaultImageToControl READ defaultImageToControl NOTIFY defaultImageToControlChanged)
+
 public:
     explicit ImageController(QObject *parent = nullptr);
+
     Q_INVOKABLE void loadImage();
     Q_INVOKABLE void restoreToDefault();
 
+    // Display image (QML)
     QImage image() const;
-    cv::Mat imageToControl() const;
-    void setImage(cv::Mat image);
 
-    cv::Mat defaultImageToControl() const;
+    // OpenCV access
+    cv::Mat originalImage() const;
+    cv::Mat currentImage() const;
+
+    // Used by filters / rotation
+    void setCurrentImage(const cv::Mat& image);
 
 signals:
     void imageChanged();
-    void imageToControlChanged();
-
-    void defaultImageToControlChanged();
 
 private:
-    QImage m_image;
-    cv::Mat m_imageToControl;
     QImage matToImage(const cv::Mat &mat);
-    cv::Mat m_defaultImageToControl;
+
+private:
+    QImage  m_qimage;          // shown in QML
+    cv::Mat m_originalImage;   // NEVER changes
+    cv::Mat m_currentImage;    // derived image
 };
 
 #endif // IMAGECONTROLLER_H

@@ -5,53 +5,111 @@ import QtQuick.Layouts
 Item {
 
     id: root
-    property real minValue: 0
-    property real maxValue: 270
-    property real value: 0
+    property real angle: 0
 
     ColumnLayout
     {
-        spacing: 10
+        spacing: 20
 
-        Rectangle
-        {
-            id: rotateContainer
-            color: "transparent"
-            border.width: 1
-            radius: 10
-            border.color: "#CAD5E2"
-            Layout.preferredHeight: 50
-            Layout.preferredWidth: 230
+        RowLayout {
+            anchors.top: parent.top
+            spacing: 10
 
-            ColumnLayout
-            {
-                anchors.centerIn: parent
-                // TEXT BOX
-                TextField
-                {
-                    id: intInput
-                    width: 100
-                    height: 40
-                    placeholderText: "0"
-                    font.pixelSize: 20
+            // Rotate clockwise
+            Rectangle {
+                id: rotateRightButton
+                color: "#CAD5E2"
+                border.color: "#333"
+                border.width: 1
+                radius: 10
 
-                    padding: 12
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 50
 
-                    validator: IntValidator
-                    {
-                        bottom: -9999
-                        top: 9999
-                    }
-
-                    onTextChanged:
-                    {
-                        if(text === "-" || text === "") return;
-                        ImageRotationController.rotateImage(parseInt(text))
-                    }
+                Image {
+                    id: rotateRightIcon
+                    anchors.centerIn: parent
+                    width: 20
+                    height: 20
+                    source: "assets/rotate-right.png"
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
                 }
 
-                // ARROW UP BUTTON
-                // ARROW DOWN BUTTON
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: {
+                       if(angle > -270)
+                       {
+                           angle -= 1.0
+                           ImageRotationController.rotateImage(angle)
+                       }
+                    }
+
+                    onPressed: rotateRightButton.opacity = 0.6
+                    onReleased: rotateRightButton.opacity = 1.0
+                }
+            }
+
+            // Rotate anti-clockwise
+            Rectangle {
+                id: rotateLeftButton
+                color: "#CAD5E2"
+                border.color: "#333"
+                border.width: 1
+                radius: 10
+
+                Layout.preferredWidth: 50
+                Layout.preferredHeight: 50
+
+                Image {
+                    id: rotateLeftIcon
+                    anchors.centerIn: parent
+                    width: 20
+                    height: 20
+                    source: "assets/rotate-left.png"
+                    fillMode: Image.PreserveAspectFit
+                    smooth: true
+                }
+
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+
+                    onClicked: {
+                        if(angle < 270)
+                        {
+                            angle += 1.0
+                            ImageRotationController.rotateImage(angle)
+                        }
+                    }
+
+                    onPressed: rotateLeftButton.opacity = 0.6
+                    onReleased: rotateLeftButton.opacity = 1.0
+                }
+            }
+
+            Rectangle {
+                id: angleText
+                color: "#CAD5E2"
+                border.color: "#333"
+                border.width: 1
+                radius: 10
+
+                Layout.preferredWidth: 70
+                Layout.preferredHeight: 50
+
+                Text {
+                    anchors.centerIn: parent
+                    font.pixelSize: 17
+                    Layout.alignment: Qt.AlignHCenter
+                    smooth: true
+                    text: angle + "°"
+                }
             }
         }
 

@@ -8,7 +8,7 @@ ImageScaleController::ImageScaleController(ImageController* imageController, QOb
 
 void ImageScaleController::slide(double value)
 {
-    cv::Mat src = this->m_ImageController->imageToControl();
+    cv::Mat src = this->m_ImageController->originalImage();
     if (src.empty())
         return;
 
@@ -29,7 +29,7 @@ void ImageScaleController::slide(double value)
     cv::Mat zoomed;
     cv::resize(src, zoomed, cv::Size(newWidth, newHeight));
 
-    this->m_ImageController->setImage(zoomed);
+    this->m_ImageController->setCurrentImage(zoomed);
 }
 
 void ImageScaleController::imageFit(const QString &fitType)

@@ -73,6 +73,8 @@ qt_add_qml_module(appPixelItApp
         assets/save.png
         assets/filters.png
         assets/adjust.png
+        assets/rotate-right.png
+        assets/rotate-left.png
 
     SOURCES
         NavigationController.h
