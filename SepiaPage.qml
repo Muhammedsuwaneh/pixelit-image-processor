@@ -118,7 +118,7 @@ Item {
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.value = parseInt(modelData)
-                            ImageScaleController.adjustSepia(root.value)
+                            ImageTextureController.adjustSepia(root.value)
                         }
                     }
                 }

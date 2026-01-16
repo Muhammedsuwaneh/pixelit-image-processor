@@ -119,7 +119,7 @@ Item {
                         cursorShape: Qt.PointingHandCursor
                         onClicked: {
                             root.value = parseInt(modelData)
-                            ImageScaleController.adjustSharpening(root.value)
+                            ImageTextureController.adjustSharpening(root.value)
                         }
                     }
                 }

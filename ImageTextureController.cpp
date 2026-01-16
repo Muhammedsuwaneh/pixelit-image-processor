@@ -1,5 +1,6 @@
 #include "ImageTextureController.h"
 #include <algorithm>
+#include <QDebug>
 
 ImageTextureController::ImageTextureController(
     ImageController* imageController,
@@ -12,6 +13,8 @@ ImageTextureController::ImageTextureController(
 
 void ImageTextureController::adjustBrightness(int brightness)
 {
+    qDebug() << brightness;
+
     cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
