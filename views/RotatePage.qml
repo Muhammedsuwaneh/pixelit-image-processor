@@ -18,7 +18,7 @@ Item {
             // Rotate clockwise
             Rectangle {
                 id: rotateRightButton
-                color: "#CAD5E2"
+                color: "#0F172B"
                 border.color: "#333"
                 border.width: 1
                 radius: 10
@@ -31,7 +31,7 @@ Item {
                     anchors.centerIn: parent
                     width: 20
                     height: 20
-                    source: "assets/rotate-right.png"
+                    source: "../assets/rotate_right.png"
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                 }
@@ -57,7 +57,7 @@ Item {
             // Rotate anti-clockwise
             Rectangle {
                 id: rotateLeftButton
-                color: "#CAD5E2"
+                color: "#0F172B"
                 border.color: "#333"
                 border.width: 1
                 radius: 10
@@ -70,7 +70,7 @@ Item {
                     anchors.centerIn: parent
                     width: 20
                     height: 20
-                    source: "assets/rotate-left.png"
+                    source: "../assets/rotate_left.png"
                     fillMode: Image.PreserveAspectFit
                     smooth: true
                 }
@@ -95,7 +95,7 @@ Item {
 
             Rectangle {
                 id: angleText
-                color: "#CAD5E2"
+                color: "#0F172B"
                 border.color: "#333"
                 border.width: 1
                 radius: 10
@@ -109,6 +109,7 @@ Item {
                     Layout.alignment: Qt.AlignHCenter
                     smooth: true
                     text: angle + "°"
+                    color: "#fff"
                 }
             }
         }
