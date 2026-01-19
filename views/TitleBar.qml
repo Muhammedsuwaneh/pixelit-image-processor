@@ -36,7 +36,7 @@ Item {
             height: 20
             mipmap: true
             fillMode: Image.PreserveAspectFit
-            source: "assets/logo.png"
+            source: "../assets/logo.png"
         }
 
         Text {

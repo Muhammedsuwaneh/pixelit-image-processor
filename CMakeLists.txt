@@ -22,33 +22,34 @@ qt_standard_project_setup(REQUIRES 6.8)
 
 qt_add_executable(appPixelItApp
     main.cpp
+    app.rc
 )
 
 qt_add_qml_module(appPixelItApp
     URI PixelItApp
     QML_FILES
-        Main.qml
-        NavigationButton.qml
-        ImagePropertyNavigation.qml
-        TitleBar.qml
-        ControlButton.qml
-        ImageController.qml
-        ImageViewer.qml
-        ImageControlButton.qml
-        ZoomPage.qml
-        PanPage.qml
-        RotatePage.qml
-        CropPage.qml
-        ResizePage.qml
-        FiltersPage.qml
-        BrightnessPage.qml
-        ContrastPage.qml
-        SaturationPage.qml
-        ExposurePage.qml
-        GrayScalePage.qml
-        SepiaPage.qml
-        InvertPage.qml
-        SharpenPage.qml
+        views/Main.qml
+        views/NavigationButton.qml
+        views/ImagePropertyNavigation.qml
+        views/TitleBar.qml
+        views/ControlButton.qml
+        views/ImageController.qml
+        views/ImageViewer.qml
+        views/ImageControlButton.qml
+        views/ZoomPage.qml
+        views/PanPage.qml
+        views/RotatePage.qml
+        views/CropPage.qml
+        views/ResizePage.qml
+        views/FiltersPage.qml
+        views/BrightnessPage.qml
+        views/ContrastPage.qml
+        views/SaturationPage.qml
+        views/ExposurePage.qml
+        views/GrayScalePage.qml
+        views/SepiaPage.qml
+        views/InvertPage.qml
+        views/SharpenPage.qml
 
     RESOURCES
         assets/logo.png
@@ -77,17 +78,17 @@ qt_add_qml_module(appPixelItApp
         assets/rotate-left.png
 
     SOURCES
-        NavigationController.h
-        NavigationController.cpp
-        WindowController.h
-        WindowController.cpp
-        ImageController.h
-        ImageController.cpp
-        SOURCES ImageScaleController.h ImageScaleController.cpp
-        SOURCES ImageProvider.h ImageProvider.cpp
-        SOURCES ImageRotationController.h ImageRotationController.cpp
-        SOURCES ImageTextureController.h ImageTextureController.cpp
-        SOURCES FiltersController.h FiltersController.cpp
+        controllers/NavigationController.h
+        controllers/NavigationController.cpp
+        controllers/WindowController.h
+        controllers/WindowController.cpp
+        controllers/ImageController.h
+        controllers/ImageController.cpp
+        SOURCES controllers/ImageScaleController.h controllers/ImageScaleController.cpp
+        SOURCES utilities/ImageProvider.h utilities/ImageProvider.cpp
+        SOURCES controllers/ImageRotationController.h controllers/ImageRotationController.cpp
+        SOURCES controllers/ImageTextureController.h controllers/ImageTextureController.cpp
+        SOURCES controllers/FiltersController.h controllers/FiltersController.cpp
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
@@ -117,3 +118,6 @@ target_link_libraries(appPixelItApp PRIVATE Qt6::Core)
 include(GNUInstallDirs)
 install(TARGETS appPixelItApp BUNDLE DESTINATION . LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR} )
 
+set_target_properties(appPixelItApp PROPERTIES
+    WIN32_EXECUTABLE TRUE
+)

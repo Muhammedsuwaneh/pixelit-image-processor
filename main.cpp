@@ -1,18 +1,21 @@
 #include <QApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
-#include "WindowController.h"
-#include "NavigationController.h"
-#include "ImageController.h"
-#include "ImageProvider.h"
-#include "ImageScaleController.h"
-#include "ImageRotationController.h"
-#include "ImageTextureController.h"
-#include "FiltersController.h"
+#include "controllers/WindowController.h"
+#include "controllers/NavigationController.h"
+#include "controllers/ImageController.h"
+#include "utilities/ImageProvider.h"
+#include "controllers/ImageScaleController.h"
+#include "controllers/ImageRotationController.h"
+#include "controllers/ImageTextureController.h"
+#include "controllers/FiltersController.h"
+#include <QIcon>
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
+    app.setWindowIcon(QIcon(":/assets/logo.ico"));
 
     QQmlApplicationEngine engine;
     QObject::connect(

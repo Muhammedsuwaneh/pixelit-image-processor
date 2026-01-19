@@ -40,7 +40,7 @@ Button {
         Image {
             Layout.preferredHeight: 17
             Layout.preferredWidth: 17
-            source: (root.iconName === "Gray Scale") ? "assets/gray.png" : "assets/" + root.iconName.toLowerCase() + ".png"
+            source: (root.iconName === "Gray Scale") ? "../assets/gray.png" : "../assets/" + root.iconName.toLowerCase() + ".png"
             fillMode: Image.PreserveAspectFit
             Layout.alignment: Qt.AlignVCenter
         }

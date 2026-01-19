@@ -1,7 +1,7 @@
 #ifndef IMAGEPROVIDER_H
 #define IMAGEPROVIDER_H
 
-#include "ImageController.h"
+#include "controllers/ImageController.h"
 #include <QQuickImageProvider>
 #include <QImage>
 

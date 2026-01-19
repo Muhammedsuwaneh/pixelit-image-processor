@@ -8,7 +8,7 @@ Window {
     width: 1300
     height: 880
     visible: true
-    flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint | Qt.Window
     color: "transparent"
 
     property string currentPage:
@@ -87,16 +87,22 @@ Window {
                            // pushes content to the left
                            Item { Layout.preferredWidth: 10 }
 
-                           Image {
-                               Layout.preferredHeight: 17
-                               Layout.preferredWidth: 17
-                               source: "assets/adjust.png"
-                               fillMode: Image.PreserveAspectCrop
-                               Layout.alignment: Qt.AlignVCenter
-                           }
+                           Rectangle {
+                                width: 28
+                                height: 28
+                                radius: 6
+                                color: "#0F172B"
+                                Image {
+                                    anchors.centerIn: parent
+                                    width: 18
+                                    height: 18
+                                    source: root.getIcon()
+                                    fillMode: Image.PreserveAspectFit
+                                }
+                            }
 
                            Text {
-                               text: "Adjust Properties"
+                               text: currentPage
                                color: "#0F172B"
                                font.pixelSize: 15
                                font.bold: true
@@ -167,5 +173,10 @@ Window {
                 }
             }
         }
+    }
+
+    function getIcon()
+    {
+        return (currentPage === "Gray Scale") ? "../assets/gray.png" : "../assets/" + currentPage.toLowerCase() + ".png"
     }
 }

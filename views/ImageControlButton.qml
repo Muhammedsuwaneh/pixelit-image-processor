@@ -33,7 +33,7 @@ Button {
             Image {
                 width: 17
                 height: 17
-                source: "assets/" + root.iconName + ".png"
+                source: "../assets/" + root.iconName + ".png"
                 fillMode: Image.PreserveAspectFit
             }
 
