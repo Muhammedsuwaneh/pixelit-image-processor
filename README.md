@@ -1,7 +1,6 @@
-Pixelit – Image Processing & Editing Application
+# Pixelit – Image Processing & Editing Application
 
-Developer: Muhammed Suwaneh
-Software Engineer | R&D | Embedded & Enterprise Software Developer
+Developer: Muhammed Suwaneh - Software Engineer | R&D | Embedded & Enterprise Software Developer
 
 ![Screenshot](screenshots/MainWindow.png)
 
@@ -10,8 +9,8 @@ The project focuses on efficient image manipulation, real-time preview, and a cl
 
 Pixelit is designed as a lightweight yet powerful image editor, showcasing strong fundamentals in image processing, UI-to-native integration, and performance-oriented C++ development.
 
-## Features
-## Image Processing & Editing
+## • Features
+## • Image Processing & Editing
 
 Load and process images using OpenCV
 
@@ -19,7 +18,7 @@ Real-time preview of applied transformations
 
 Non-destructive editing pipeline (operations applied in sequence)
 
-## Transformations
+## • Transformations
 
 Zoom (aspect-ratio preserved)
 Pan
@@ -27,7 +26,7 @@ Rotate
 Crop
 Resize
 
-## Filters
+## • Filters
 
 Grayscale
 Sepia
@@ -35,7 +34,7 @@ Gaussian Blur
 Sharpen
 Edge Detection
 
-## Image Adjustments
+## • Image Adjustments
 
 Brightness
 Contrast
@@ -46,14 +45,14 @@ Grayscale (adjustment mode)
 Sepia (adjustment mode)
 Sharpen (intensity-based)
 
-## Architecture Highlights
+## • Architecture Highlights
 
 Clean separation between UI (QML) and image processing logic (C++ / OpenCV)
 Modular filter and adjustment pipeline
 Designed for easy extension (new filters or tools can be added without refactoring core logic)
 Thread-safe image processing for smooth UI interaction
 
-## Technologies Used
+## • Technologies Used
 
 C++ (C++17)
 Qt 6
@@ -64,25 +63,25 @@ CMake
 QML Image Provider
 Multithreading (std::thread)
 
-## Image Processing Techniques
+## • Image Processing Techniques
 
 Pixelit uses classic and efficient image processing techniques provided by OpenCV:
 
-## Filters & Effects
+## • Filters & Effects
 
 Color space conversions (BGR ↔ Gray)
 Convolution-based filters (Gaussian Blur, Sharpen)
 Edge detection (Sobel / Canny-based)
 Pixel-level transformations (Invert, Sepia)
 
-## Adjustments
+## • Adjustments
 
 Linear and non-linear pixel intensity mapping
 Contrast stretching
 Brightness and exposure correction
 Saturation manipulation in HSV color space
 
-## Setup & Development
+## • Setup & Development
 ##Prerequisites
 
 Make sure you have the following installed:
@@ -95,7 +94,7 @@ CMake ≥ 3.16
 C++17 compatible compiler
 MSVC / GCC / Clang
 
-## OpenCV Setup
+## • OpenCV Setup
 
 Ensure OpenCV is correctly installed and accessible.
 Example (Windows):
@@ -119,7 +118,7 @@ Verify:
 OpenCV core modules are detected
 Image loading and processing work correctly
 
-## Build the Project
+## • Build the Project
 
 ```bash
 mkdir build
@@ -131,7 +130,7 @@ cmake --build .
 
 Or open the project directly in Qt Creator and configure it with CMake.
 
-## Run the Application
+## • Run the Application
 
 After building:
 Run from Qt Creator, or
@@ -140,9 +139,8 @@ Make sure:
 Image files are accessible
 Required OpenCV DLLs / shared libraries are in the runtime path
 
-## Version
-
+## • Version
 1.0.0
 
-## Licensed
+## • Licensed
 Under [`MIT`](LICENSE) - Copyright 2025/2026 
