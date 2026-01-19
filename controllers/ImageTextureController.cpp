@@ -15,7 +15,7 @@ void ImageTextureController::adjustBrightness(int brightness)
 {
     qDebug() << brightness;
 
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double beta = brightness; // range: [-100, 100]
@@ -28,7 +28,7 @@ void ImageTextureController::adjustBrightness(int brightness)
 
 void ImageTextureController::adjustContrast(int contrast)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double alpha = std::clamp(contrast / 100.0, 0.0, 3.0);
@@ -63,7 +63,7 @@ void ImageTextureController::adjustSaturation(int saturation)
 
 void ImageTextureController::adjustExposure(int exposure)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double gamma = std::clamp(exposure / 100.0, 0.1, 3.0);
@@ -79,7 +79,7 @@ void ImageTextureController::adjustExposure(int exposure)
 
 void ImageTextureController::adjustGrayScale(int)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     cv::Mat gray, dst;
@@ -91,7 +91,7 @@ void ImageTextureController::adjustGrayScale(int)
 
 void ImageTextureController::adjustSepia(int sepia)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double strength = std::clamp(sepia / 100.0, 0.0, 1.0);
@@ -112,7 +112,7 @@ void ImageTextureController::adjustSepia(int sepia)
 
 void ImageTextureController::adjustSharpening(int value)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double amount = std::clamp(value / 100.0, 0.0, 2.0);

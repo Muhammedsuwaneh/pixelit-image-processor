@@ -9,6 +9,7 @@ class ImageController : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QImage image READ image NOTIFY imageChanged)
+    Q_PROPERTY(cv::Mat originalImage READ originalImage NOTIFY originalImageChanged)
 
 public:
     explicit ImageController(QObject *parent = nullptr);
@@ -28,6 +29,7 @@ public:
 
 signals:
     void imageChanged();
+    void originalImageChanged();
 
 private:
     QImage matToImage(const cv::Mat &mat);

@@ -8,7 +8,7 @@ ImageRotationController::ImageRotationController(ImageController* imageControlle
 
 void ImageRotationController::rotateImage(double angle)
 {
-    cv::Mat src = m_ImageController->originalImage(); // ✅ ALWAYS original
+    cv::Mat src = m_ImageController->currentImage(); // ✅ ALWAYS original
     if (src.empty())
         return;
 

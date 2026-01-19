@@ -51,6 +51,7 @@ void ImageController::loadImage()
 
     this->m_qimage = matToImage(m_currentImage);
     emit imageChanged();
+    emit originalImageChanged();
 }
 
 void ImageController::restoreToDefault()
@@ -84,6 +85,7 @@ void ImageController::setCurrentImage(const cv::Mat& image)
     if (image.empty())
         return;
 
+    this->m_originalImage = this->m_currentImage;
     this->m_currentImage = image.clone();
     this->m_qimage = matToImage(m_currentImage);
 

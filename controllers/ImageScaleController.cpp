@@ -8,7 +8,7 @@ ImageScaleController::ImageScaleController(ImageController* imageController, QOb
 
 void ImageScaleController::slide(double value)
 {
-    cv::Mat src = this->m_ImageController->originalImage();
+    cv::Mat src = this->m_ImageController->currentImage();
     if (src.empty())
         return;
 
