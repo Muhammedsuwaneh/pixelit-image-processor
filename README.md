@@ -1,7 +1,5 @@
 # Pixelit – Image Processing & Editing Application
 
-Developer: Muhammed Suwaneh - Software Engineer | R&D | Embedded & Enterprise Software Developer
-
 ![Screenshot](screenshots/MainWindow.png)
 
 Pixelit is a desktop image processing and editing application built with C++, Qt (QML + Qt Core), and OpenCV.
