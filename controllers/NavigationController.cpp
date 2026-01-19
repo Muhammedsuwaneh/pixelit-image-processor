@@ -4,7 +4,6 @@ NavigationController::NavigationController(QObject *parent)
     : QObject{parent}
 {
     this->m_pages << "Zoom"
-                  << "Pan"
                   << "Rotate"
                   << "Crop"
                   << "Resize"

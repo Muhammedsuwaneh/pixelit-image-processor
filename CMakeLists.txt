@@ -37,7 +37,6 @@ qt_add_qml_module(appPixelItApp
         views/ImageViewer.qml
         views/ImageControlButton.qml
         views/ZoomPage.qml
-        views/PanPage.qml
         views/RotatePage.qml
         views/CropPage.qml
         views/ResizePage.qml
@@ -60,7 +59,6 @@ qt_add_qml_module(appPixelItApp
         assets/exposure.png
         assets/gray.png
         assets/invert.png
-        assets/pan.png
         assets/resize.png
         assets/rotate.png
         assets/saturation.png
