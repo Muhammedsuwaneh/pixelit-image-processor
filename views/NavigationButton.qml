@@ -29,36 +29,31 @@ Button {
                  : "transparent"
     }
 
-    contentItem: RowLayout {
+    contentItem: Row {
         anchors.fill: parent
+        anchors.leftMargin: 10
         spacing: 10
 
-        Item {
-            Layout.preferredWidth: 5
-        }
-
         Image {
-            Layout.preferredHeight: 17
-            Layout.preferredWidth: 17
-            source: (root.iconName === "Gray Scale") ? "../assets/gray.png" : "../assets/" + root.iconName.toLowerCase() + ".png"
+            width: 17
+            height: 17
+            anchors.verticalCenter: parent.verticalCenter
+            source: (root.iconName === "Gray Scale")
+                    ? "../assets/gray.png"
+                    : "../assets/" + root.iconName.toLowerCase() + ".png"
             fillMode: Image.PreserveAspectFit
-            Layout.alignment: Qt.AlignVCenter
         }
 
         Text {
             text: root.content
             color: "#ffffff"
-            font.pixelSize: 12
+            font.pixelSize: 13
             font.bold: true
-            Layout.alignment: Qt.AlignVCenter
+            anchors.verticalCenter: parent.verticalCenter
             elide: Text.ElideRight
         }
-
-        Item
-        {
-            Layout.fillWidth: true
-        }
     }
+
 
     MouseArea
     {

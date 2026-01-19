@@ -90,4 +90,5 @@ void ImageController::setCurrentImage(const cv::Mat& image)
     this->m_qimage = matToImage(m_currentImage);
 
     emit imageChanged();
+    emit originalImageChanged();
 }

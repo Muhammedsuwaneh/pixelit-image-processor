@@ -7,8 +7,8 @@ Item {
     id: root
 
     Rectangle {
-        width: 850
-        height: 750
+        width: parent.width - 20
+        height: parent.height - 20
         radius: 10
         color: "#F8FAFC"
         border.color: "#CAD5E2"
