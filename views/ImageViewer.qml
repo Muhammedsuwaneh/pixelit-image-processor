@@ -15,18 +15,23 @@ Item {
         border.width: 1
         clip: true
 
-        Image
-        {
+        Image {
             id: previewer
             anchors.fill: parent
-            fillMode: root.getFillMode()
             source: "image://controller/current"
+            fillMode: root.getFillMode()
             smooth: true
+
+            transform: Scale {
+                origin.x: previewer.width / 2
+                origin.y: previewer.height / 2
+                xScale: ImageScaleController.zoomFactor
+                yScale: ImageScaleController.zoomFactor
+            }
 
             Connections {
                 target: imageController
-                function onImageChanged()
-                {
+                function onImageChanged() {
                     previewer.source = ""
                     previewer.source = "image://controller/current"
                 }

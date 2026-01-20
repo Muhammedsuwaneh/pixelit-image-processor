@@ -1,64 +1,46 @@
 #include "ImageScaleController.h"
-#include <QDebug>
+#include <QtMath>
 
-ImageScaleController::ImageScaleController(ImageController* imageController, QObject *parent) : QObject{parent}, m_ImageController(imageController)
+ImageScaleController::ImageScaleController(ImageController* imageController,
+                                           QObject *parent)
+    : QObject(parent),
+    m_imageController(imageController)
 {
-    Q_ASSERT(m_ImageController);
+    Q_ASSERT(m_imageController);
 }
 
 void ImageScaleController::slide(double value)
 {
-    cv::Mat src = this->m_ImageController->originalImage();
-    if (src.empty())
+    value = qBound(0.0, value, 100.0);
+
+    const double minZoom = 0.1;
+    const double maxZoom = 3.0;
+
+    double normalized = value / 100.0;
+    double newZoom = minZoom + normalized * (maxZoom - minZoom);
+
+    if (qFuzzyCompare(m_zoomFactor, newZoom))
         return;
 
-    double factor = value / 100.0;
-    if (factor < 0.01)
-        factor = 0.01;
-
-    qDebug() << factor;
-
-    setZoomFactor(factor);
-
-    int newWidth  = static_cast<int>(src.cols * factor);
-    int newHeight = static_cast<int>(src.rows * factor);
-
-    if (newWidth <= 0 || newHeight <= 0)
-        return;
-
-    cv::Mat zoomed;
-    cv::resize(src, zoomed, cv::Size(newWidth, newHeight));
-
-    this->m_ImageController->setCurrentImage(zoomed);
+    m_zoomFactor = newZoom;
+    emit zoomFactorChanged();
 }
 
 void ImageScaleController::imageFit(const QString &fitType)
 {
-    this->setImageFitType(fitType);
+    if (m_imageFitType == fitType)
+        return;
+
+    m_imageFitType = fitType;
+    emit imageFitTypeChanged();
 }
 
 double ImageScaleController::zoomFactor() const
 {
-    return this->m_zoomFactor;
-}
-
-void ImageScaleController::setZoomFactor(double newZoomFactor)
-{
-    if (this->m_zoomFactor == newZoomFactor)
-        return;
-    this->m_zoomFactor = newZoomFactor;
-    emit zoomFactorChanged();
+    return m_zoomFactor;
 }
 
 QString ImageScaleController::imageFitType() const
 {
     return m_imageFitType;
-}
-
-void ImageScaleController::setImageFitType(const QString &newImageFitType)
-{
-    if (m_imageFitType == newImageFitType)
-        return;
-    m_imageFitType = newImageFitType;
-    emit imageFitTypeChanged();
 }
