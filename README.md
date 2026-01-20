@@ -20,11 +20,11 @@ Non-destructive editing pipeline (operations applied in sequence)
 
 ## • Transformations
 
-Zoom (aspect-ratio preserved)
-Pan
-Rotate
-Crop
-Resize
+- Zoom (aspect-ratio preserved)
+- Pan
+- Rotate
+- Crop
+- Resize
 
 ![Screenshot](screenshots/Resize.png)
 
@@ -34,22 +34,22 @@ Resize
 
 ## • Filters
 
-Grayscale
-Sepia
-Gaussian Blur
-Sharpen
-Edge Detection
+- Grayscale
+- Sepia
+- Gaussian Blur
+- Sharpen
+- Edge Detection
 
 ## • Image Adjustments
 
-Brightness
-Contrast
-Saturation
-Exposure
-Invert Colors
-Grayscale (adjustment mode)
-Sepia (adjustment mode)
-Sharpen (intensity-based)
+- Brightness
+- Contrast
+- Saturation
+- Exposure
+- Invert Colors
+- Grayscale (adjustment mode)
+- Sepia (adjustment mode)
+- Sharpen (intensity-based)
 
 ![Screenshot](screenshots/Brightness.png)
 
@@ -64,14 +64,14 @@ Thread-safe image processing for smooth UI interaction
 
 ## • Technologies Used
 
-C++ (C++17)
-Qt 6
-Qt Quick (QML)
-Qt Core / GUI
-OpenCV
-CMake
-QML Image Provider
-Multithreading (std::thread)
+- C++ (C++17)
+- Qt 6
+- Qt Quick (QML)
+- Qt Core / GUI
+- OpenCV
+- CMake
+- QML Image Provider
+- Multithreading (std::thread)
 
 ## • Image Processing Techniques
 
@@ -79,30 +79,30 @@ Pixelit uses classic and efficient image processing techniques provided by OpenC
 
 ## • Filters & Effects
 
-Color space conversions (BGR ↔ Gray)
-Convolution-based filters (Gaussian Blur, Sharpen)
-Edge detection (Sobel / Canny-based)
-Pixel-level transformations (Invert, Sepia)
+- Color space conversions (BGR ↔ Gray)
+- Convolution-based filters (Gaussian Blur, Sharpen)
+- Edge detection (Sobel / Canny-based)
+- Pixel-level transformations (Invert, Sepia)
 
 ## • Adjustments
 
-Linear and non-linear pixel intensity mapping
-Contrast stretching
-Brightness and exposure correction
-Saturation manipulation in HSV color space
+- Linear and non-linear pixel intensity mapping
+- Contrast stretching
+- Brightness and exposure correction
+- Saturation manipulation in HSV color space
 
 ## • Setup & Development
 ##Prerequisites
 
 Make sure you have the following installed:
 
-Qt 6.x
-Qt Quick
-Qt Widgets
-OpenCV
-CMake ≥ 3.16
-C++17 compatible compiler
-MSVC / GCC / Clang
+- Qt 6.x
+- Qt Quick
+- Qt Widgets
+- OpenCV
+- CMake ≥ 3.16
+- C++17 compatible compiler
+- MSVC / GCC / Clang
 
 ## • OpenCV Setup
 
