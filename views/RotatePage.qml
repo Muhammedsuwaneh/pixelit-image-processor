@@ -15,7 +15,6 @@ Item {
             anchors.top: parent.top
             spacing: 10
 
-            // Rotate clockwise
             Rectangle {
                 id: rotateRightButton
                 color: "#0F172B"
@@ -50,11 +49,13 @@ Item {
                     }
 
                     onPressed: rotateRightButton.opacity = 0.6
-                    onReleased: rotateRightButton.opacity = 1.0
+                    onReleased:
+                    {
+                        rotateRightButton.opacity = 1.0
+                    }
                 }
             }
 
-            // Rotate anti-clockwise
             Rectangle {
                 id: rotateLeftButton
                 color: "#0F172B"
@@ -89,7 +90,10 @@ Item {
                     }
 
                     onPressed: rotateLeftButton.opacity = 0.6
-                    onReleased: rotateLeftButton.opacity = 1.0
+                    onReleased:
+                    {
+                        rotateLeftButton.opacity = 1.0
+                    }
                 }
             }
 
@@ -151,6 +155,7 @@ Item {
                         onClicked: {
                             root.angle = parseInt(modelData)
                             ImageRotationController.rotateImage(root.angle)
+                            imageController.commit()
                         }
                     }
                 }

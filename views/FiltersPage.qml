@@ -48,6 +48,7 @@ Item {
                             {
                                 FiltersController.applyFilter(modelData)
                                 root.oldFilter = modelData
+                                imageController.commit()
                             }
                         }
                     }

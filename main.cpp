@@ -10,6 +10,7 @@
 #include "controllers/ImageTextureController.h"
 #include "controllers/FiltersController.h"
 #include "controllers/ImageResizeController.h"
+#include "controllers/ImageCropController.h"
 #include <QIcon>
 
 int main(int argc, char *argv[])
@@ -45,12 +46,14 @@ int main(int argc, char *argv[])
     auto imageRotationController = new ImageRotationController(&imageController, &engine);
     auto imageTextureController = new ImageTextureController(&imageController, &engine);
     auto filtersController = new FiltersController(&imageController, &engine);
+    auto imageCropController = new ImageCropController(&imageController, &engine);
 
     engine.rootContext()->setContextProperty("ImageScaleController", imageScaleController);
     engine.rootContext()->setContextProperty("ImageResizeController", imageResizeController);
     engine.rootContext()->setContextProperty("ImageRotationController", imageRotationController);
     engine.rootContext()->setContextProperty("ImageTextureController", imageTextureController);
     engine.rootContext()->setContextProperty("FiltersController", filtersController);
+    engine.rootContext()->setContextProperty("ImageCropController", imageCropController);
 
     return app.exec();
 }

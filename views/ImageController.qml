@@ -28,22 +28,31 @@ Item {
                 width: 125
                 content: "Save"
                 iconName: "save"
+                onClicked: imageController.saveImage()
             }
 
             ImageControlButton {
                 width: 125
                 content: "Undo"
                 iconName: "undo"
+                onClicked: imageController.undo()
             }
 
             ImageControlButton {
                 width: 125
                 content: "Redo"
                 iconName: "redo"
+                onClicked: imageController.redo()
+            }
+
+            ImageControlButton {
+                width: 125
+                content: "Restore"
+                iconName: "restore"
+                onClicked: imageController.restoreToDefault()
             }
         }
 
-        // BOTTOM BORDER ONLY
         Rectangle {
             anchors.left: parent.left
             anchors.right: parent.right

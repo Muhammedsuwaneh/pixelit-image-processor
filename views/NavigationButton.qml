@@ -31,8 +31,16 @@ Button {
 
     contentItem: Row {
         anchors.fill: parent
-        anchors.leftMargin: 10
         spacing: 10
+
+        Rectangle
+        {
+            color: NavigationController.currentActivePage === root.currentButtonIndex
+                   ? "#2B7FFF" : "transparent";
+            width: 5
+            anchors.verticalCenter: parent.verticalCenter
+            height: parent.height - 2
+        }
 
         Image {
             width: 17

@@ -45,39 +45,15 @@ void ImageController::loadImage()
     if (img.empty())
         return;
 
-    // Store original ONCE
-    this->m_originalImage = img.clone();
-    this->m_currentImage  = img.clone();
+    m_originalImage = img.clone();
+    m_currentImage  = img.clone();
 
-    this->m_qimage = matToImage(m_currentImage);
+    m_undoStack.clear();
+    m_redoStack.clear();
+
+    m_qimage = matToImage(m_currentImage);
     emit imageChanged();
     emit originalImageChanged();
-}
-
-void ImageController::restoreToDefault()
-{
-    if (m_originalImage.empty())
-        return;
-
-    this->m_currentImage = this->m_originalImage.clone();
-    this->m_qimage = matToImage(this->m_currentImage);
-
-    emit imageChanged();
-}
-
-QImage ImageController::image() const
-{
-    return this->m_qimage;
-}
-
-cv::Mat ImageController::originalImage() const
-{
-    return this->m_originalImage;
-}
-
-cv::Mat ImageController::currentImage() const
-{
-    return this->m_currentImage;
 }
 
 void ImageController::setCurrentImage(const cv::Mat& image)
@@ -85,10 +61,96 @@ void ImageController::setCurrentImage(const cv::Mat& image)
     if (image.empty())
         return;
 
-    this->m_originalImage = this->m_currentImage;
-    this->m_currentImage = image.clone();
-    this->m_qimage = matToImage(m_currentImage);
+    m_currentImage = image.clone();
+    m_qimage = matToImage(m_currentImage);
 
     emit imageChanged();
+}
+
+void ImageController::commit()
+{
+    if (m_currentImage.empty())
+        return;
+
+    m_undoStack.push_back(m_currentImage.clone());
+
+    m_redoStack.clear();
+
+    m_originalImage = m_currentImage.clone();
     emit originalImageChanged();
 }
+
+void ImageController::undo()
+{
+    if (m_undoStack.empty())
+        return;
+
+    m_redoStack.push_back(m_currentImage.clone());
+
+    m_currentImage = m_undoStack.back().clone();
+    m_undoStack.pop_back();
+
+    m_qimage = matToImage(m_currentImage);
+    emit imageChanged();
+}
+
+void ImageController::redo()
+{
+    if (m_redoStack.empty())
+        return;
+
+    m_undoStack.push_back(m_currentImage.clone());
+
+    m_currentImage = m_redoStack.back().clone();
+    m_redoStack.pop_back();
+
+    m_qimage = matToImage(m_currentImage);
+    emit imageChanged();
+}
+
+void ImageController::restoreToDefault()
+{
+    if (m_originalImage.empty())
+        return;
+
+    m_undoStack.clear();
+    m_redoStack.clear();
+
+    m_currentImage = m_originalImage.clone();
+    m_qimage = matToImage(m_currentImage);
+
+    emit imageChanged();
+}
+
+void ImageController::saveImage()
+{
+    if (m_currentImage.empty())
+        return;
+
+    const QString filePath =
+        QFileDialog::getSaveFileName(nullptr,
+                                     "Save Image",
+                                     QString(),
+                                     "Images (*.png *.jpg *.jpeg *.bmp)");
+
+    if (filePath.isEmpty())
+        return;
+
+    cv::imwrite(filePath.toStdString(), m_currentImage);
+}
+
+QImage ImageController::image() const
+{
+    return m_qimage;
+}
+
+cv::Mat ImageController::originalImage() const
+{
+    return m_originalImage;
+}
+
+cv::Mat ImageController::currentImage() const
+{
+    return m_currentImage;
+}
+

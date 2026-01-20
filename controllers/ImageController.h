@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QImage>
 #include <opencv2/opencv.hpp>
+#include <vector>
 
 class ImageController : public QObject
 {
@@ -17,14 +18,17 @@ public:
     Q_INVOKABLE void loadImage();
     Q_INVOKABLE void restoreToDefault();
 
-    // Display image (QML)
+    Q_INVOKABLE void undo();
+    Q_INVOKABLE void redo();
+
+    Q_INVOKABLE void commit();
+    Q_INVOKABLE void saveImage();
+
     QImage image() const;
 
-    // OpenCV access
     cv::Mat originalImage() const;
     cv::Mat currentImage() const;
 
-    // Used by filters / rotation
     void setCurrentImage(const cv::Mat& image);
 
 signals:
@@ -35,9 +39,12 @@ private:
     QImage matToImage(const cv::Mat &mat);
 
 private:
-    QImage  m_qimage;          // shown in QML
-    cv::Mat m_originalImage;   // NEVER changes
-    cv::Mat m_currentImage;    // derived image
+    QImage  m_qimage;
+    cv::Mat m_originalImage;
+    cv::Mat m_currentImage;
+
+    std::vector<cv::Mat> m_undoStack;
+    std::vector<cv::Mat> m_redoStack;
 };
 
 #endif // IMAGECONTROLLER_H

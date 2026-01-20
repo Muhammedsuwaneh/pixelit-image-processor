@@ -74,7 +74,12 @@ Item {
                     anchors.fill: parent
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
-                        ImageResizeController.resizeImage(Number(widthTextField.text), Number(heightTextField.text))
+
+                        ImageResizeController.targetWidth = 800
+                        ImageResizeController.targetHeight = 600
+                        ImageResizeController.resizeImage()
+
+                        imageController.commit()
                     }
                 }
             }

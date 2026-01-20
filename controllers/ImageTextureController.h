@@ -19,6 +19,7 @@ public:
     Q_INVOKABLE void adjustGrayScale(int grayScale);
     Q_INVOKABLE void adjustSepia(int sepia);
     Q_INVOKABLE void adjustSharpening(int val);
+    Q_INVOKABLE void adjustInvert(bool enabled);
 
 signals:
 private:

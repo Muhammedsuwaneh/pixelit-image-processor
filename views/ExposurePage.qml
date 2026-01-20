@@ -70,6 +70,10 @@ Item {
                                 updateValue(mouse.x)
                         }
 
+                        onReleased: {
+                            imageController.commit()
+                        }
+
                         function updateValue(mouseX)
                         {
                             let clampedX = Math.max(0, Math.min(mouseX, outerSlideContainer.width)) // current slider position

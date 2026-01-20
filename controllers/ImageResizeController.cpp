@@ -33,21 +33,18 @@ void ImageResizeController::setTargetHeight(int newTargetHeight)
     emit targetHeightChanged();
 }
 
-void ImageResizeController::resizeImage(const int width, const int height)
+void ImageResizeController::resizeImage()
 {
     try
     {
-            cv::Mat src = m_ImageController->currentImage();
+            cv::Mat src = m_ImageController->originalImage();
             if (src.empty())
                 return;
 
             qDebug() << "Before resizing: " << src.rows << " - " << src.cols;
 
-            if (width <= 0 || height <= 0)
+            if (this->m_targetWidth <= 0 || this->m_targetHeight <= 0)
                 return;
-
-            setTargetWidth(width);
-            setTargetHeight(height);
 
             cv::Mat resized;
             cv::resize(src, resized, cv::Size(m_targetWidth, m_targetHeight));

@@ -13,25 +13,21 @@ ImageTextureController::ImageTextureController(
 
 void ImageTextureController::adjustBrightness(int brightness)
 {
-    qDebug() << brightness;
-
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
-    double beta = brightness; // range: [-100, 100]
-
     cv::Mat dst;
-    src.convertTo(dst, -1, 1.0, beta);
+    src.convertTo(dst, -1, 1.0, brightness);
 
     m_ImageController->setCurrentImage(dst);
 }
 
 void ImageTextureController::adjustContrast(int contrast)
 {
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
-    double alpha = std::clamp(contrast / 100.0, 0.0, 3.0);
+    double alpha = std::clamp(contrast / 100.0 + 1.0, 0.0, 3.0);
 
     cv::Mat dst;
     src.convertTo(dst, -1, alpha, 0);
@@ -63,19 +59,22 @@ void ImageTextureController::adjustSaturation(int saturation)
 
 void ImageTextureController::adjustExposure(int exposure)
 {
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
-    double gamma = std::clamp(exposure / 100.0, 0.1, 3.0);
+    double gamma = std::clamp(exposure / 100.0 + 1.0, 0.1, 3.0);
 
     cv::Mat dst;
-    cv::pow(src / 255.0, 1.0 / gamma, dst);
-    dst *= 255.0;
+    cv::Mat f;
+    src.convertTo(f, CV_32F, 1.0 / 255.0);
 
-    dst.convertTo(dst, CV_8U);
+    cv::pow(f, 1.0 / gamma, f);
+    f *= 255.0;
+    f.convertTo(dst, CV_8U);
 
     m_ImageController->setCurrentImage(dst);
 }
+
 
 void ImageTextureController::adjustGrayScale(int)
 {
@@ -112,15 +111,33 @@ void ImageTextureController::adjustSepia(int sepia)
 
 void ImageTextureController::adjustSharpening(int value)
 {
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
     double amount = std::clamp(value / 100.0, 0.0, 2.0);
 
     cv::Mat blurred, dst;
-    cv::GaussianBlur(src, blurred, cv::Size(0, 0), 5);
+    cv::GaussianBlur(src, blurred, cv::Size(0, 0), 3);
 
     cv::addWeighted(src, 1 + amount, blurred, -amount, 0, dst);
+    m_ImageController->setCurrentImage(dst);
+}
+
+
+void ImageTextureController::adjustInvert(bool enabled)
+{
+    cv::Mat src = m_ImageController->originalImage();
+    if (src.empty()) return;
+
+    if (!enabled)
+    {
+        m_ImageController->setCurrentImage(src);
+        return;
+    }
+
+    cv::Mat dst;
+    cv::bitwise_not(src, dst);
 
     m_ImageController->setCurrentImage(dst);
 }
+

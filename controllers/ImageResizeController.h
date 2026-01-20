@@ -19,7 +19,7 @@ public:
     int targetHeight() const;
     void setTargetHeight(int newTargetHeight);
 
-    Q_INVOKABLE void resizeImage(const int width, const int height);
+    Q_INVOKABLE void resizeImage();
 
 signals:
 
