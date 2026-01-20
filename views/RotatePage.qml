@@ -126,7 +126,7 @@ Item {
 
             Repeater
             {
-                model: ["90", "180", "270"]
+                model: ["0", "90", "180", "270"]
 
                 Rectangle
                 {
