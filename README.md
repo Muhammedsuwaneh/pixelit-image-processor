@@ -16,6 +16,8 @@ Real-time preview of applied transformations
 
 Non-destructive editing pipeline (operations applied in sequence)
 
+![Screenshot](screenshots/MainWindow.png)
+
 ## • Transformations
 
 Zoom (aspect-ratio preserved)
@@ -23,6 +25,12 @@ Pan
 Rotate
 Crop
 Resize
+
+![Screenshot](screenshots/Resize.png)
+
+![Screenshot](screenshots/Crop.png)
+
+![Screenshot](screenshots/Rotate.png)
 
 ## • Filters
 
@@ -42,6 +50,10 @@ Invert Colors
 Grayscale (adjustment mode)
 Sepia (adjustment mode)
 Sharpen (intensity-based)
+
+![Screenshot](screenshots/Brightness.png)
+
+![Screenshot](screenshots/Invert.png)
 
 ## • Architecture Highlights
 

@@ -78,7 +78,7 @@ void ImageTextureController::adjustExposure(int exposure)
 
 void ImageTextureController::adjustGrayScale(int)
 {
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
     cv::Mat gray, dst;
@@ -90,7 +90,7 @@ void ImageTextureController::adjustGrayScale(int)
 
 void ImageTextureController::adjustSepia(int sepia)
 {
-    cv::Mat src = m_ImageController->currentImage();
+    cv::Mat src = m_ImageController->originalImage();
     if (src.empty()) return;
 
     double strength = std::clamp(sepia / 100.0, 0.0, 1.0);
