@@ -84,7 +84,6 @@ Window {
                             spacing: 10
                             leftPadding: 10
 
-                           // pushes content to the left
                            Item { Layout.preferredWidth: 10 }
 
                            Rectangle {

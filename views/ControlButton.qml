@@ -26,7 +26,7 @@ Button {
         cursorShape: Qt.PointingHandCursor
 
         onClicked: {
-             root.clicked()
+            root.clicked()
         }
     }
 }
