@@ -1,8 +1,8 @@
-# Pixelit – Image Processing & Editing Application
+# PixelIt – Image Processing & Editing Application
 
 ![Screenshot](screenshots/MainWindow.png)
 
-Pixelit is a desktop image processing and editing application built with C++, Qt (QML + Qt Core), and OpenCV.
+PixelIt is a desktop image processing and editing application built with C++, Qt (QML + Qt Core), and OpenCV.
 The project focuses on efficient image manipulation, real-time preview, and a clean, extensible architecture suitable for advanced computer vision and image processing workflows.
 
 Pixelit is designed as a lightweight yet powerful image editor, showcasing strong fundamentals in image processing, UI-to-native integration, and performance-oriented C++ development.
