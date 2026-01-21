@@ -21,7 +21,6 @@ Non-destructive editing pipeline (operations applied in sequence)
 ## • Transformations
 
 - Zoom (aspect-ratio preserved)
-- Pan
 - Rotate
 - Crop
 - Resize
