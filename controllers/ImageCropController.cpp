@@ -9,7 +9,7 @@ ImageCropController::ImageCropController(ImageController* imageController, QObje
 
 void ImageCropController::cropImage()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->editBaseImage();
     if (src.empty())
         return;
 

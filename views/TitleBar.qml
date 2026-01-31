@@ -54,6 +54,7 @@ Item {
         anchors.bottom: parent.bottom
 
         onPressed: WindowController.startDrag(mouse.x, mouse.y)
+        onDoubleClicked:  WindowController.maximize()
     }
 
     Row {

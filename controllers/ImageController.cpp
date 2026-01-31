@@ -46,6 +46,7 @@ void ImageController::loadImage()
         return;
 
     m_originalImage = img.clone();
+    m_editBaseImage = img.clone();
     m_currentImage  = img.clone();
 
     m_undoStack.clear();
@@ -72,41 +73,43 @@ void ImageController::commit()
     if (m_currentImage.empty())
         return;
 
-    m_undoStack.push_back(m_currentImage.clone());
-
+    m_undoStack.push_back(m_editBaseImage.clone());
+    m_editBaseImage = m_currentImage.clone();
     m_redoStack.clear();
-
-    m_originalImage = m_currentImage.clone();
-    emit originalImageChanged();
 }
+
 
 void ImageController::undo()
 {
     if (m_undoStack.empty())
         return;
 
-    m_redoStack.push_back(m_currentImage.clone());
+    m_redoStack.push_back(m_editBaseImage.clone());
 
-    m_currentImage = m_undoStack.back().clone();
+    m_editBaseImage = m_undoStack.back().clone();
     m_undoStack.pop_back();
 
+    m_currentImage = m_editBaseImage.clone();
     m_qimage = matToImage(m_currentImage);
     emit imageChanged();
 }
+
 
 void ImageController::redo()
 {
     if (m_redoStack.empty())
         return;
 
-    m_undoStack.push_back(m_currentImage.clone());
+    m_undoStack.push_back(m_editBaseImage.clone());
 
-    m_currentImage = m_redoStack.back().clone();
+    m_editBaseImage = m_redoStack.back().clone();
     m_redoStack.pop_back();
 
+    m_currentImage = m_editBaseImage.clone();
     m_qimage = matToImage(m_currentImage);
     emit imageChanged();
 }
+
 
 void ImageController::restoreToDefault()
 {
@@ -116,7 +119,8 @@ void ImageController::restoreToDefault()
     m_undoStack.clear();
     m_redoStack.clear();
 
-    m_currentImage = m_originalImage.clone();
+    m_editBaseImage = m_originalImage.clone();
+    m_currentImage  = m_originalImage.clone();
     m_qimage = matToImage(m_currentImage);
 
     emit imageChanged();
@@ -147,6 +151,11 @@ QImage ImageController::image() const
 cv::Mat ImageController::originalImage() const
 {
     return m_originalImage;
+}
+
+cv::Mat ImageController::editBaseImage() const
+{
+    return this->m_editBaseImage;
 }
 
 cv::Mat ImageController::currentImage() const

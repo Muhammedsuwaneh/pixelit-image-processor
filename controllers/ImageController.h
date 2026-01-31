@@ -27,6 +27,7 @@ public:
     QImage image() const;
 
     cv::Mat originalImage() const;
+    cv::Mat editBaseImage() const;
     cv::Mat currentImage() const;
 
     void setCurrentImage(const cv::Mat& image);
@@ -42,6 +43,7 @@ private:
     QImage  m_qimage;
     cv::Mat m_originalImage;
     cv::Mat m_currentImage;
+    cv::Mat m_editBaseImage;
 
     std::vector<cv::Mat> m_undoStack;
     std::vector<cv::Mat> m_redoStack;

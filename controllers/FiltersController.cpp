@@ -27,7 +27,8 @@ void FiltersController::applyFilter(const QString& filter)
 
 void FiltersController::applyGrayFilter()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
+
     if (src.empty())
         return;
 
@@ -40,7 +41,8 @@ void FiltersController::applyGrayFilter()
 
 void FiltersController::applySepia()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
+
     if (src.empty())
         return;
 
@@ -59,7 +61,8 @@ void FiltersController::applySepia()
 
 void FiltersController::applyGaussianBlur()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
+
     if (src.empty())
         return;
 
@@ -71,7 +74,8 @@ void FiltersController::applyGaussianBlur()
 
 void FiltersController::applySharpen()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
+
     if (src.empty())
         return;
 
@@ -90,7 +94,8 @@ void FiltersController::applySharpen()
 
 void FiltersController::applyEdgeDetection()
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
+
     if (src.empty())
         return;
 

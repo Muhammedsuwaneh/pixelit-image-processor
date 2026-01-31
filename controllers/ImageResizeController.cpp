@@ -37,21 +37,21 @@ void ImageResizeController::resizeImage()
 {
     try
     {
-            cv::Mat src = m_ImageController->originalImage();
-            if (src.empty())
-                return;
+        cv::Mat src = m_ImageController->editBaseImage();
+        if (src.empty())
+            return;
 
-            qDebug() << "Before resizing: " << src.rows << " - " << src.cols;
+        qDebug() << "Before resizing: " << src.rows << " - " << src.cols;
 
-            if (this->m_targetWidth <= 0 || this->m_targetHeight <= 0)
-                return;
+        if (this->m_targetWidth <= 0 || this->m_targetHeight <= 0)
+            return;
 
-            cv::Mat resized;
-            cv::resize(src, resized, cv::Size(m_targetWidth, m_targetHeight));
+        cv::Mat resized;
+        cv::resize(src, resized, cv::Size(m_targetWidth, m_targetHeight));
 
-            this->m_ImageController->setCurrentImage(resized);
+        this->m_ImageController->setCurrentImage(resized);
 
-            qDebug() << "Before resizing: " << m_ImageController->currentImage().rows << " - " << m_ImageController->currentImage().cols;
+        qDebug() << "Before resizing: " << m_ImageController->currentImage().rows << " - " << m_ImageController->currentImage().cols;
     }
     catch(const char* msg)
     {

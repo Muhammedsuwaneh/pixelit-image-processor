@@ -37,7 +37,7 @@ void ImageTextureController::adjustContrast(int contrast)
 
 void ImageTextureController::adjustSaturation(int saturation)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty() || src.channels() < 3) return;
 
     cv::Mat hsv;
@@ -59,7 +59,7 @@ void ImageTextureController::adjustSaturation(int saturation)
 
 void ImageTextureController::adjustExposure(int exposure)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double gamma = std::clamp(exposure / 100.0 + 1.0, 0.1, 3.0);
@@ -76,21 +76,31 @@ void ImageTextureController::adjustExposure(int exposure)
 }
 
 
-void ImageTextureController::adjustGrayScale(int)
+void ImageTextureController::adjustGrayScale(int scale)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
-    cv::Mat gray, dst;
-    cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
-    cv::cvtColor(gray, dst, cv::COLOR_GRAY2BGR);
+    cv::Mat gray, grayRGB, blended;
 
-    m_ImageController->setCurrentImage(dst);
+    cv::cvtColor(src, gray, cv::COLOR_RGB2GRAY);
+    cv::cvtColor(gray, grayRGB, cv::COLOR_GRAY2RGB);
+
+    double g = std::clamp(scale / 100.0, 0.0, 1.0);
+
+    cv::addWeighted(
+        src, 1.0 - g,
+        grayRGB, g,
+        0.0,
+        blended
+        );
+
+    m_ImageController->setCurrentImage(blended);
 }
 
 void ImageTextureController::adjustSepia(int sepia)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double strength = std::clamp(sepia / 100.0, 0.0, 1.0);
@@ -111,7 +121,7 @@ void ImageTextureController::adjustSepia(int sepia)
 
 void ImageTextureController::adjustSharpening(int value)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     double amount = std::clamp(value / 100.0, 0.0, 2.0);
@@ -126,7 +136,7 @@ void ImageTextureController::adjustSharpening(int value)
 
 void ImageTextureController::adjustInvert(bool enabled)
 {
-    cv::Mat src = m_ImageController->originalImage();
+    cv::Mat src = m_ImageController->currentImage();
     if (src.empty()) return;
 
     if (!enabled)
